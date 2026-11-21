@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="g12" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAF8F1"/>
+      <stop offset="100%" stop-color="#CBEFE0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g12)"/>
+  <rect x="30" y="30" width="540" height="390" rx="16" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Cake slice -->
+  <g transform="translate(300, 240)">
+    <polygon points="-80,40 60,-20 90,40" fill="#FFE9B8" stroke="#E6C87C" stroke-width="2"/>
+    <polygon points="-80,40 90,40 90,80 -80,80" fill="#F9C8D9"/>
+    <!-- Candle -->
+    <rect x="-10" y="-70" width="12" height="50" rx="3" fill="#BBDFF5"/>
+    <ellipse cx="-4" cy="-80" rx="6" ry="10" fill="#FFB84D"/>
+    <ellipse cx="-4" cy="-80" rx="3" ry="6" fill="#FFF3C4"/>
+  </g>
+  <text x="300" y="80" font-family="sans-serif" font-weight="bold" font-size="24" fill="#4A5A6A" text-anchor="middle">THE LAST PIECE OF CAKE</text>
+  <text x="300" y="390" font-family="serif" font-size="16" font-style="italic" fill="#2E7558" text-anchor="middle">Saved 100% for you • Happy Birthday!</text>
+</svg>

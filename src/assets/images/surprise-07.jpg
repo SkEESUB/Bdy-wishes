@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="g7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE8D6"/>
+      <stop offset="50%" stop-color="#FFD1B3"/>
+      <stop offset="100%" stop-color="#C9EBDD"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g7)"/>
+  <rect x="30" y="30" width="540" height="390" rx="16" fill="#FFFFFF" opacity="0.88"/>
+  <!-- Sunset hill -->
+  <circle cx="300" cy="180" r="60" fill="#FFA366" opacity="0.8"/>
+  <ellipse cx="300" cy="360" rx="280" ry="120" fill="#C9EBDD"/>
+  <ellipse cx="180" cy="380" rx="200" ry="100" fill="#B3DFC9"/>
+  <!-- Little picnic blanket -->
+  <polygon points="260,300 340,300 370,330 230,330" fill="#F9C8D9"/>
+  <text x="300" y="80" font-family="sans-serif" font-weight="bold" font-size="24" fill="#4A5A6A" text-anchor="middle">GOLDEN HOUR GLOW</text>
+  <text x="300" y="390" font-family="serif" font-size="16" font-style="italic" fill="#B36633" text-anchor="middle">When the sky turned peach just for you</text>
+</svg>

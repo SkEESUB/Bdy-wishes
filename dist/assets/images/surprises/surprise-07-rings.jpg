@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <radialGradient id="ringBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FAF5FF"/>
+      <stop offset="60%" stop-color="#EFE2FC"/>
+      <stop offset="100%" stop-color="#DDC4F7"/>
+    </radialGradient>
+    <linearGradient id="goldRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF0B8"/>
+      <stop offset="50%" stop-color="#F2BA38"/>
+      <stop offset="100%" stop-color="#A87A13"/>
+    </linearGradient>
+    <linearGradient id="silverRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#D8E2EC"/>
+      <stop offset="100%" stop-color="#9BAFC1"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#ringBg)"/>
+  <ellipse cx="300" cy="245" rx="180" ry="120" fill="#FFFFFF" opacity="0.65"/>
+
+  <!-- Velvet display cushion -->
+  <ellipse cx="300" cy="260" rx="140" ry="55" fill="#E6D3F8" stroke="#D3B4F0" stroke-width="3"/>
+  <ellipse cx="300" cy="255" rx="120" ry="42" fill="#F4ECFC"/>
+
+  <!-- Ring 1 (Gold, tilted left) -->
+  <g transform="translate(265, 220) rotate(-22)">
+    <ellipse cx="0" cy="0" rx="55" ry="55" fill="none" stroke="url(#goldRing)" stroke-width="14"/>
+    <ellipse cx="0" cy="0" rx="55" ry="55" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.6"/>
+  </g>
+
+  <!-- Ring 2 (Silver with Solitaire Diamond, tilted right, linked) -->
+  <g transform="translate(335, 215) rotate(22)">
+    <ellipse cx="0" cy="0" rx="55" ry="55" fill="none" stroke="url(#silverRing)" stroke-width="14"/>
+    <ellipse cx="0" cy="0" rx="55" ry="55" fill="none" stroke="#FFFFFF" stroke-width="3" opacity="0.8"/>
+
+    <!-- Diamond setting -->
+    <g transform="translate(0, -56)">
+      <polygon points="0,-18 14,-4 9,10 -9,10 -14,-4" fill="#E8F4FD" stroke="#B8D5EB" stroke-width="2"/>
+      <polygon points="0,-18 9,10 -9,10" fill="#FFFFFF"/>
+      <!-- Sparkle stars -->
+      <path d="M 0 -35 L 3 -24 L 14 -21 L 3 -18 L 0 -7 L -3 -18 L -14 -21 L -3 -24 Z" fill="#FFFFFF"/>
+    </g>
+  </g>
+
+  <!-- Ambient light glints -->
+  <circle cx="240" cy="170" r="3" fill="#FFFFFF"/>
+  <circle cx="380" cy="160" r="4" fill="#FFFFFF"/>
+</svg>

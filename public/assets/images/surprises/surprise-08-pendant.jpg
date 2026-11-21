@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <radialGradient id="pendantBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FFFBF0"/>
+      <stop offset="60%" stop-color="#FEEFC7"/>
+      <stop offset="100%" stop-color="#F9DE96"/>
+    </radialGradient>
+    <linearGradient id="goldChain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF2B8"/>
+      <stop offset="50%" stop-color="#E5AF36"/>
+      <stop offset="100%" stop-color="#A17210"/>
+    </linearGradient>
+    <linearGradient id="gemGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#9BC8EA"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#pendantBg)"/>
+  <circle cx="300" cy="225" r="170" fill="#FFFFFF" opacity="0.6"/>
+
+  <g transform="translate(300, 200)">
+    <!-- Fine necklace chain drape -->
+    <path d="M -160 -120 Q 0 80 0 90 Q 0 80 160 -120" fill="none" stroke="url(#goldChain)" stroke-width="4" stroke-dasharray="7,3"/>
+
+    <!-- Pendant Bail -->
+    <ellipse cx="0" cy="94" rx="7" ry="11" fill="url(#goldChain)"/>
+    <circle cx="0" cy="94" r="4" fill="#FFFBF0"/>
+
+    <!-- Main Pendant Frame: Vintage teardrop with sparkling jewel -->
+    <g transform="translate(0, 130)">
+      <!-- Gold outer halo -->
+      <path d="M 0 -22 C -32 5, -35 48, 0 65 C 35 48, 32 5, 0 -22 Z" fill="url(#goldChain)"/>
+
+      <!-- Inner Crystal Teardrop -->
+      <path d="M 0 -15 C -24 8, -26 40, 0 54 C 26 40, 24 8, 0 -15 Z" fill="url(#gemGrad)"/>
+
+      <!-- Diamond facets -->
+      <polygon points="0,-15 -14,16 0,32 14,16" fill="#FFFFFF" opacity="0.7"/>
+      <polygon points="0,32 -18,22 -14,46 0,54" fill="#75A8CC" opacity="0.5"/>
+      <polygon points="0,32 18,22 14,46 0,54" fill="#A8D4F2" opacity="0.6"/>
+
+      <!-- Starburst sparkle -->
+      <path d="M 0 10 L 4 22 L 16 26 L 4 30 L 0 42 L -4 30 L -16 26 L -4 22 Z" fill="#FFFFFF"/>
+    </g>
+
+    <circle cx="-12" cy="115" r="2.5" fill="#FFFFFF"/>
+    <circle cx="15" cy="135" r="3" fill="#FFFFFF"/>
+  </g>
+</svg>

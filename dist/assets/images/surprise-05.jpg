@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="g5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EBF4FA"/>
+      <stop offset="100%" stop-color="#D0E3F0"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g5)"/>
+  <rect x="30" y="30" width="540" height="390" rx="16" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Cozy window with raindrops -->
+  <rect x="150" y="110" width="300" height="230" rx="10" fill="#CDE2F0" stroke="#7E9EB8" stroke-width="6"/>
+  <line x1="300" y1="110" x2="300" y2="340" stroke="#7E9EB8" stroke-width="4"/>
+  <line x1="150" y1="220" x2="450" y2="220" stroke="#7E9EB8" stroke-width="4"/>
+  <!-- Raindrops on glass -->
+  <ellipse cx="200" cy="160" rx="4" ry="8" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="250" cy="280" rx="3" ry="7" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="380" cy="180" rx="4" ry="9" fill="#FFFFFF" opacity="0.8"/>
+  <ellipse cx="410" cy="270" rx="3" ry="6" fill="#FFFFFF" opacity="0.8"/>
+  <text x="300" y="80" font-family="sans-serif" font-weight="bold" font-size="24" fill="#4A5A6A" text-anchor="middle">OUR RAINY DAY RULE</text>
+  <text x="300" y="390" font-family="serif" font-size="16" font-style="italic" fill="#587A96" text-anchor="middle">Blankets, hot cocoa, and no alarms</text>
+</svg>

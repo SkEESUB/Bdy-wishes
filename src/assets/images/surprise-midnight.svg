@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="mbg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E2640"/>
+      <stop offset="60%" stop-color="#2D3A5C"/>
+      <stop offset="100%" stop-color="#4A587E"/>
+    </linearGradient>
+    <filter id="mshadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#FFE9B8" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#mbg)"/>
+  <!-- Moon -->
+  <circle cx="560" cy="170" r="80" fill="#FFF4D0" filter="url(#mshadow)"/>
+  <circle cx="530" cy="150" r="74" fill="#2D3A5C"/>
+  <!-- Stars -->
+  <g fill="#FFE9B8">
+    <circle cx="160" cy="120" r="3"/>
+    <circle cx="280" cy="90" r="2.5"/>
+    <circle cx="420" cy="130" r="4"/>
+    <circle cx="680" cy="100" r="3"/>
+    <circle cx="200" cy="240" r="3"/>
+    <circle cx="340" cy="210" r="2"/>
+    <circle cx="640" cy="280" r="3.5"/>
+    <polygon points="120,180 125,195 140,195 128,204 132,218 120,210 108,218 112,204 100,195 115,195" fill="#FFF"/>
+    <polygon points="460,70 464,82 476,82 466,89 470,101 460,94 450,101 454,89 444,82 456,82" fill="#FFF"/>
+  </g>
+  <!-- Window Silhouette -->
+  <g transform="translate(180, 260)">
+    <rect x="0" y="0" width="440" height="240" rx="16" fill="#141A2D" opacity="0.85"/>
+    <rect x="20" y="20" width="190" height="200" rx="10" fill="#25314D" stroke="#5A6D99" stroke-width="4"/>
+    <rect x="230" y="20" width="190" height="200" rx="10" fill="#25314D" stroke="#5A6D99" stroke-width="4"/>
+    <!-- Warm lamp glow inside -->
+    <circle cx="320" cy="120" r="50" fill="#FFE9B8" opacity="0.25"/>
+  </g>
+  <text x="400" y="550" font-family="serif" font-size="26" font-style="italic" fill="#E4D3F5" text-anchor="middle">"You are far more important than you know"</text>
+</svg>

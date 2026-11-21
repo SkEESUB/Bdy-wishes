@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <radialGradient id="currBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#EAF8F1"/>
+      <stop offset="60%" stop-color="#CEEFE0"/>
+      <stop offset="100%" stop-color="#ACDEC6"/>
+    </radialGradient>
+    <linearGradient id="noteGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4FCF7"/>
+      <stop offset="50%" stop-color="#E1F7EC"/>
+      <stop offset="100%" stop-color="#C5EDD8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#currBg)"/>
+  <circle cx="300" cy="225" r="170" fill="#FFFFFF" opacity="0.6"/>
+
+  <g transform="translate(300, 225) rotate(-3)">
+    <!-- Decorative Banknote Frame -->
+    <rect x="-210" y="-115" width="420" height="230" rx="16" fill="url(#noteGrad)" stroke="#4EA87A" stroke-width="4"/>
+    <rect x="-195" y="-100" width="390" height="200" rx="12" fill="none" stroke="#68C496" stroke-width="2" stroke-dasharray="6,4"/>
+
+    <!-- Corner Guilloche & Denomination Badges -->
+    <circle cx="-165" cy="-70" r="18" fill="#4EA87A"/>
+    <text x="-165" y="-63" font-family="serif" font-weight="bold" font-size="20" fill="#FFFFFF" text-anchor="middle">★</text>
+    <circle cx="165" cy="-70" r="18" fill="#4EA87A"/>
+    <text x="165" y="-63" font-family="serif" font-weight="bold" font-size="20" fill="#FFFFFF" text-anchor="middle">★</text>
+    <circle cx="-165" cy="70" r="18" fill="#4EA87A"/>
+    <text x="-165" y="77" font-family="serif" font-weight="bold" font-size="20" fill="#FFFFFF" text-anchor="middle">★</text>
+    <circle cx="165" cy="70" r="18" fill="#4EA87A"/>
+    <text x="165" y="77" font-family="serif" font-weight="bold" font-size="20" fill="#FFFFFF" text-anchor="middle">★</text>
+
+    <!-- Center Vignette Medallion -->
+    <ellipse cx="0" cy="0" rx="85" ry="85" fill="#FFFFFF" stroke="#4EA87A" stroke-width="3"/>
+    <ellipse cx="0" cy="0" rx="75" ry="75" fill="#E8F9F0"/>
+
+    <!-- Calendar Date Icon (November 24) -->
+    <rect x="-35" y="-40" width="70" height="75" rx="10" fill="#FFFFFF" stroke="#388E63" stroke-width="3"/>
+    <rect x="-35" y="-40" width="70" height="24" rx="6" fill="#E45B88"/>
+    <circle cx="-16" cy="-38" r="3" fill="#FFFFFF"/>
+    <circle cx="16" cy="-38" r="3" fill="#FFFFFF"/>
+    <text x="0" y="-23" font-family="sans-serif" font-weight="bold" font-size="12" fill="#FFFFFF" text-anchor="middle">NOV</text>
+    <text x="0" y="22" font-family="serif" font-weight="900" font-size="34" fill="#388E63" text-anchor="middle">24</text>
+
+    <!-- Decorative ribbons and seals -->
+    <path d="M -120 20 Q -70 50 0 50 Q 70 50 120 20" stroke="#4EA87A" stroke-width="3" fill="none"/>
+    <circle cx="100" cy="0" r="22" fill="#FFD566" stroke="#D4A017" stroke-width="2"/>
+    <text x="100" y="7" font-size="18" text-anchor="middle">🎀</text>
+  </g>
+</svg>

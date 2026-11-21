@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <radialGradient id="nightBg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#2D354E"/>
+      <stop offset="60%" stop-color="#1E2335"/>
+      <stop offset="100%" stop-color="#141724"/>
+    </radialGradient>
+    <radialGradient id="pandaGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9D2"/>
+      <stop offset="50%" stop-color="#FFE885" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFE885" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lampSilicone" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#FFFEE6"/>
+      <stop offset="100%" stop-color="#FFEFA8"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#nightBg)"/>
+
+  <!-- Warm ambient halo -->
+  <circle cx="300" cy="225" r="190" fill="url(#pandaGlow)"/>
+
+  <!-- Stars in background -->
+  <circle cx="100" cy="80" r="2.5" fill="#FFEAA8" opacity="0.8"/>
+  <circle cx="500" cy="90" r="3" fill="#FFEAA8" opacity="0.7"/>
+  <circle cx="480" cy="330" r="2" fill="#FFEAA8" opacity="0.6"/>
+
+  <g transform="translate(300, 240)">
+    <!-- Wooden nightstand base -->
+    <ellipse cx="0" cy="115" rx="130" ry="25" fill="#42352B"/>
+    <ellipse cx="0" cy="110" rx="120" ry="20" fill="#5E4C3E"/>
+
+    <!-- Panda Lamp Body (Plump glowing silicone) -->
+    <!-- Black Ears -->
+    <ellipse cx="-65" cy="-80" rx="26" ry="24" fill="#2C2E38"/>
+    <ellipse cx="65" cy="-80" rx="26" ry="24" fill="#2C2E38"/>
+
+    <!-- Head & Body (soft pear shape) -->
+    <ellipse cx="0" cy="40" rx="88" ry="72" fill="url(#lampSilicone)"/>
+    <circle cx="0" cy="-25" r="75" fill="url(#lampSilicone)"/>
+
+    <!-- Black Eye Patches -->
+    <ellipse cx="-32" cy="-25" rx="20" ry="25" transform="rotate(-15 -32 -25)" fill="#2C2E38"/>
+    <ellipse cx="32" cy="-25" rx="20" ry="25" transform="rotate(15 32 -25)" fill="#2C2E38"/>
+
+    <!-- Cute Eyes -->
+    <circle cx="-30" cy="-24" r="6" fill="#FFFFFF"/>
+    <circle cx="-28" cy="-26" r="2.5" fill="#2C2E38"/>
+    <circle cx="30" cy="-24" r="6" fill="#FFFFFF"/>
+    <circle cx="32" cy="-26" r="2.5" fill="#2C2E38"/>
+
+    <!-- Nose & Mouth -->
+    <ellipse cx="0" cy="-4" rx="8" ry="5" fill="#2C2E38"/>
+    <path d="M -7 5 Q 0 12 7 5" stroke="#2C2E38" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+    <!-- Rosy Cheek Glows -->
+    <circle cx="-50" cy="-4" r="11" fill="#FFAAA6" opacity="0.65"/>
+    <circle cx="50" cy="-4" r="11" fill="#FFAAA6" opacity="0.65"/>
+
+    <!-- Little Black Paws -->
+    <ellipse cx="-45" cy="55" rx="20" ry="16" fill="#2C2E38"/>
+    <ellipse cx="45" cy="55" rx="20" ry="16" fill="#2C2E38"/>
+    <!-- Feet -->
+    <ellipse cx="-40" cy="100" rx="22" ry="15" fill="#2C2E38"/>
+    <ellipse cx="40" cy="100" rx="22" ry="15" fill="#2C2E38"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="600" height="450">
+  <defs>
+    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E8"/>
+      <stop offset="100%" stop-color="#FFEBB8"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#g4)"/>
+  <rect x="30" y="30" width="540" height="390" rx="16" fill="#FFFFFF" opacity="0.9"/>
+  <!-- Vinyl Record -->
+  <g transform="translate(300, 240)">
+    <circle cx="0" cy="0" r="110" fill="#2E3846"/>
+    <circle cx="0" cy="0" r="95" fill="none" stroke="#414D5E" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="75" fill="none" stroke="#414D5E" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#414D5E" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="42" fill="#F9C8D9"/>
+    <circle cx="0" cy="0" r="10" fill="#2E3846"/>
+  </g>
+  <text x="440" y="180" font-size="28" fill="#E48BB0">♪</text>
+  <text x="160" y="220" font-size="34" fill="#6FA8D6">♫</text>
+  <text x="300" y="80" font-family="sans-serif" font-weight="bold" font-size="24" fill="#4A5A6A" text-anchor="middle">THE SONG YOU ALWAYS HUM</text>
+  <text x="300" y="395" font-family="serif" font-size="16" font-style="italic" fill="#B38029" text-anchor="middle">Now playing in my head on repeat</text>
+</svg>
