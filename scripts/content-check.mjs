@@ -61,6 +61,9 @@ t("letter sealed initially + greeting for Sri Lakshmi", html.BirthdayLetter.incl
 t("gift reveal present", html.GiftBox.includes(cfg.gift.revealTitle) === false || html.GiftBox.includes("something small"));
 t("no autoplay attribute anywhere", !/\sautoplay[\s>="]/.test(JSON.stringify(html)), JSON.stringify(html).match(/\sautoplay[\s>="]{0,6}/g));
 t("recipient name is Sri Lakshmi", cfg.recipient.name === "Sri Lakshmi" && (html.PasswordScreen.includes("Sri Lakshmi") || html.Countdown.includes("Sri Lakshmi")), cfg.recipient.name);
+t("Birthday Celebration displays Sri Lakshmi ❤️", html.BirthdayCelebration.includes("Happy Birthday Sri Lakshmi") && html.BirthdayCelebration.includes("❤️"));
+t("12 3D flip card front and back faces present", (html.SurpriseGrid.match(/backface-visibility:\s*hidden/g) || []).length >= 24);
+t("Subtle floating hearts in background", html.ScrapbookBackground.includes("will-change-transform"));
 
 console.log(checks.join("\n"));
 const bad = checks.filter((c) => c.startsWith("FAIL"));

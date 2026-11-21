@@ -96,26 +96,55 @@ export default function BirthdayCelebration({ onComplete }) {
             <PartyPopper size={15} /> hooray, it's official
           </motion.div>
 
-          <h3
+          <div
             ref={headRef}
-            className="text-stroke-white mx-auto flex flex-wrap items-baseline justify-center gap-x-3 font-hand text-[15vw] leading-[0.95] font-bold sm:text-[10vw] md:text-[86px]"
-            aria-label={cfg.celebration.headline}
+            className="text-stroke-white mx-auto flex flex-col items-center justify-center font-hand font-bold"
+            aria-label="Happy Birthday Sri Lakshmi"
           >
-            {words.map((word, wi) => (
-              <span key={wi} className="inline-flex">
-                {word.split("").map((ch, ci) => (
-                  <span
-                    key={`${wi}-${ci}`}
-                    data-letter
-                    className="inline-block"
-                    style={{ color: LETTER_COLORS[(wi * 3 + ci) % LETTER_COLORS.length] }}
-                  >
-                    {ch}
-                  </span>
-                ))}
+            {/* Line 1: HAPPY BIRTHDAY */}
+            <h3 className="flex flex-wrap items-baseline justify-center gap-x-3 text-[12vw] sm:text-[8vw] md:text-[76px] leading-[0.95]">
+              {words.map((word, wi) => (
+                <span key={wi} className="inline-flex">
+                  {word.split("").map((ch, ci) => (
+                    <span
+                      key={`hb-${wi}-${ci}`}
+                      data-letter
+                      className="inline-block"
+                      style={{ color: LETTER_COLORS[(wi * 3 + ci) % LETTER_COLORS.length] }}
+                    >
+                      {ch}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </h3>
+
+            {/* Line 2: Sri Lakshmi ❤️ directly underneath */}
+            <div className="mt-2 sm:mt-3 flex flex-wrap items-center justify-center gap-x-2 text-[10vw] sm:text-[6.5vw] md:text-[62px] leading-tight">
+              {"Sri Lakshmi".split(" ").map((word, wi) => (
+                <span key={wi} className="inline-flex">
+                  {word.split("").map((ch, ci) => (
+                    <span
+                      key={`sl-${wi}-${ci}`}
+                      data-letter
+                      className="inline-block"
+                      style={{ color: LETTER_COLORS[(wi * 2 + ci + 1) % LETTER_COLORS.length] }}
+                    >
+                      {ch}
+                    </span>
+                  ))}
+                </span>
+              ))}
+              <span
+                data-letter
+                className="inline-block text-[8vw] sm:text-[5.5vw] md:text-[50px] ml-1 select-none"
+                style={{ color: "#E48BB0" }}
+                aria-hidden="true"
+              >
+                ❤️
               </span>
-            ))}
-          </h3>
+            </div>
+          </div>
 
           <motion.div
             initial={reduce ? false : { opacity: 0, y: 18 }}

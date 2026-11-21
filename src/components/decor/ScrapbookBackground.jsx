@@ -40,6 +40,29 @@ export default function ScrapbookBackground({ variant = "blue", floaters = 16 })
     [floaters]
   );
 
+  // Subtle floating hearts: pastel pink, soft lavender, low opacity, slow floating movement
+  const subtleHearts = useMemo(
+    () =>
+      Array.from({ length: 16 }, (_, i) => {
+        const r1 = rand(i + 201);
+        const r2 = rand(i + 241);
+        const r3 = rand(i + 283);
+        const colors = ["#F9C8D9", "#E48BB0", "#DCD4F2", "#CBBFE8", "#F3C5D6", "#DDD4F5"];
+        return {
+          left: 4 + r1 * 90,
+          top: 6 + r2 * 88,
+          size: 13 + Math.floor(r3 * 11),
+          delay: r2 * 8,
+          duration: 11 + r1 * 7,
+          dx: (r3 - 0.5) * 45,
+          rot: (r1 - 0.5) * 50,
+          opacity: 0.22 + r3 * 0.16,
+          color: colors[i % colors.length],
+        };
+      }),
+    []
+  );
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <div className={`absolute inset-0 ${cls}`} />
@@ -50,6 +73,27 @@ export default function ScrapbookBackground({ variant = "blue", floaters = 16 })
             "radial-gradient(120% 80% at 50% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%), radial-gradient(90% 70% at 50% 100%, rgba(220,212,242,.45), rgba(255,255,255,0) 60%)",
         }}
       />
+
+      {/* Subtle floating background hearts layer */}
+      {subtleHearts.map((h, i) => (
+        <div
+          key={`subtle-heart-${i}`}
+          className="anim-float absolute pointer-events-none will-change-transform"
+          style={{
+            left: `${h.left}%`,
+            top: `${h.top}%`,
+            animationDelay: `${h.delay}s`,
+            animationDuration: `${h.duration}s`,
+            ["--dx"]: `${h.dx}px`,
+            ["--rot"]: `${h.rot}deg`,
+            opacity: h.opacity,
+          }}
+        >
+          <Heart size={h.size} color={h.color} />
+        </div>
+      ))}
+
+      {/* Primary decorative floaters */}
       {items.map((it, i) => {
         const style = {
           left: `${it.left}%`,
