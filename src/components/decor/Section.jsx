@@ -10,7 +10,7 @@ export default function Section({ id, number, title, kicker, palette = "#6FA8D6"
   return (
     <section
       id={id}
-      className={`relative mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20 ${className}`}
+      className={`relative mx-auto w-full max-w-6xl scroll-mt-24 px-3 sm:px-6 py-10 sm:py-20 overflow-x-clip ${className}`}
       data-section={id}
     >
       <motion.header
@@ -43,7 +43,7 @@ export default function Section({ id, number, title, kicker, palette = "#6FA8D6"
         viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.08 }}
       >
-        {bare ? children : <div className="paper paper-dashed p-4 sm:p-8">{children}</div>}
+        {bare ? children : <div className="paper paper-dashed p-3.5 sm:p-8">{children}</div>}
       </motion.div>
     </section>
   );

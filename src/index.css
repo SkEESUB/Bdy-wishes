@@ -34,10 +34,13 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100vw;
   overflow-x: hidden;
   color: var(--color-blue-ink);
   font-family: var(--font-body);
@@ -46,7 +49,20 @@ body {
 }
 
 #root {
+  width: 100%;
+  max-width: 100vw;
   overflow-x: clip;
+}
+
+button, a, [role="button"], .tappable {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+input, textarea, select {
+  font-size: 16px;
 }
 
 ::selection {

@@ -102,21 +102,21 @@ export default function PasswordScreen({ onUnlock }) {
             initial={reduce ? false : { opacity: 0, y: 24 }}
             animate={wrong ? { x: [0, -8, 8, -6, 6, 0] } : { opacity: 1, y: 0, x: 0 }}
             transition={wrong ? { duration: 0.45 } : { duration: 0.6, ease: "easeOut" }}
-            className="paper paper-dashed relative z-10 w-full max-w-sm p-6 sm:p-8"
+            className="paper paper-dashed relative z-10 w-full max-w-sm p-4 sm:p-8"
           >
-            <div className="mb-5 flex flex-col items-center text-center">
-              <span className="mb-3 grid h-14 w-14 place-items-center rounded-full border-[3px] border-white bg-pink-pastel sticker">
-                <Lock className="h-6 w-6 text-pink-deep" />
+            <div className="mb-4 sm:mb-5 flex flex-col items-center text-center">
+              <span className="mb-2.5 sm:mb-3 grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-full border-[3px] border-white bg-pink-pastel sticker">
+                <Lock className="h-5 w-5 sm:h-6 sm:w-6 text-pink-deep" />
               </span>
-              <h2 className="font-hand text-3xl font-bold text-blue-ink sm:text-4xl">Secret knock, please</h2>
-              <p className="mt-1 font-cute text-base text-blue-deep/80">{cfg.recipient.name}, this one's just for you.</p>
-              <p className="mt-1 font-body text-sm text-blue-ink/70">
+              <h2 className="font-hand text-2xl font-bold text-blue-ink sm:text-4xl">Secret knock, please</h2>
+              <p className="mt-1 font-cute text-sm sm:text-base text-blue-deep/80">{cfg.recipient.name}, this one's just for you.</p>
+              <p className="mt-1 font-body text-xs sm:text-sm text-blue-ink/70">
                 Hint: {cfg.passwordHint}
               </p>
             </div>
 
             <div
-              className={`mb-4 flex h-14 items-center justify-center gap-2 rounded-2xl border-2 border-dashed ${
+              className={`mb-3.5 sm:mb-4 flex h-12 sm:h-14 items-center justify-center gap-1.5 sm:gap-2 rounded-2xl border-2 border-dashed px-2 ${
                 wrong ? "border-pink-deep bg-pink-soft" : "border-blue-deep/40 bg-white/70"
               }`}
               aria-live="polite"
@@ -126,7 +126,7 @@ export default function PasswordScreen({ onUnlock }) {
                   key={i}
                   animate={wrong ? { y: [0, -6, 0] } : { y: 0 }}
                   transition={{ delay: i * 0.04, duration: 0.4 }}
-                  className={`grid h-9 w-7 place-items-center rounded-lg font-ui text-lg font-bold ${
+                  className={`grid h-8 w-6 sm:h-9 sm:w-7 place-items-center rounded-lg font-ui text-base sm:text-lg font-bold ${
                     entry[i] ? "bg-blue-deep/85 text-white" : "bg-blue-soft/70 text-blue-deep/40"
                   }`}
                 >
@@ -135,9 +135,9 @@ export default function PasswordScreen({ onUnlock }) {
               ))}
             </div>
 
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col gap-1 sm:gap-1.5">
               {ROWS.map((row, ri) => (
-                <div key={ri} className="flex justify-center gap-1.5" style={{ paddingLeft: ri * 8 }}>
+                <div key={ri} className="flex w-full justify-center gap-1 sm:gap-1.5">
                   {row.split("").map((ch) => (
                     <motion.button
                       key={ch}
@@ -146,7 +146,7 @@ export default function PasswordScreen({ onUnlock }) {
                       onClick={() => press(ch)}
                       disabled={unlocked}
                       aria-label={`letter ${ch}`}
-                      className="h-11 w-9 rounded-xl border-2 border-white bg-white/85 font-ui text-sm font-bold text-blue-ink shadow-sm transition hover:bg-pink-pastel sm:h-12 sm:w-10 sm:text-base"
+                      className="flex h-10 w-7 flex-1 min-w-0 max-w-[34px] sm:h-12 sm:w-10 sm:max-w-[40px] items-center justify-center rounded-lg sm:rounded-xl border-2 border-white bg-white/85 p-0 font-ui text-xs font-bold text-blue-ink shadow-sm transition hover:bg-pink-pastel active:scale-95 sm:text-base cursor-pointer"
                     >
                       {ch}
                     </motion.button>
@@ -161,15 +161,15 @@ export default function PasswordScreen({ onUnlock }) {
                     sfx.key();
                     setEntry((v) => v.slice(0, -1));
                   }}
-                  className="flex h-11 flex-1 items-center justify-center gap-1 rounded-xl border-2 border-white bg-blue-soft font-cute text-base text-blue-ink transition hover:bg-lavender sm:h-12"
+                  className="flex h-10 sm:h-12 flex-1 items-center justify-center gap-1 rounded-xl border-2 border-white bg-blue-soft font-cute text-sm sm:text-base text-blue-ink transition hover:bg-lavender cursor-pointer"
                 >
-                  <Delete size={16} /> back
+                  <Delete size={15} /> back
                 </motion.button>
                 <motion.button
                   type="button"
                   whileTap={{ scale: 0.9 }}
                   onClick={() => submit(entry)}
-                  className="flex h-11 flex-1 items-center justify-center gap-1 rounded-xl border-2 border-white bg-pink-deep font-cute text-base font-bold text-white transition hover:scale-[1.03] sm:h-12"
+                  className="flex h-10 sm:h-12 flex-1 items-center justify-center gap-1 rounded-xl border-2 border-white bg-pink-deep font-cute text-sm sm:text-base font-bold text-white transition hover:scale-[1.03] cursor-pointer"
                 >
                   unlock
                 </motion.button>

@@ -17,7 +17,7 @@ function Parchment({ onClose }) {
       exit={{ opacity: 0, y: 30, scale: 0.94 }}
       transition={{ type: "spring", stiffness: 130, damping: 18 }}
       style={{ transformPerspective: 1200 }}
-      className="parchment relative mx-auto w-full max-w-3xl rounded-[22px] border-[3px] border-[#E4D3B8] p-6 sm:p-10"
+      className="parchment relative mx-auto w-full max-w-3xl rounded-[22px] border-[3px] border-[#E4D3B8] p-4 sm:p-10"
     >
       {/* folded-paper creases */}
       <span className="pointer-events-none absolute inset-x-6 top-1/3 h-[2px] bg-gradient-to-r from-transparent via-[#C4A87A]/25 to-transparent" aria-hidden="true" />

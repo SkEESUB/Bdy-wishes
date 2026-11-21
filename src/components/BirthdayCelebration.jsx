@@ -62,7 +62,7 @@ export default function BirthdayCelebration({ onComplete }) {
       palette="#E48BB0"
       bare
     >
-      <div ref={scope} className="relative overflow-hidden rounded-[28px] border-2 border-white bg-gradient-to-b from-blue-soft/80 via-cream to-pink-soft/70 p-6 text-center shadow-scrap-lg sm:p-10">
+      <div ref={scope} className="relative overflow-hidden rounded-[28px] border-2 border-white bg-gradient-to-b from-blue-soft/80 via-cream to-pink-soft/70 p-4 sm:p-10 text-center shadow-scrap-lg">
         {/* decorations */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           {[
@@ -151,7 +151,7 @@ export default function BirthdayCelebration({ onComplete }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="paper paper-dashed mx-auto mt-6 max-w-2xl p-6 sm:p-8"
+            className="paper paper-dashed mx-auto mt-6 max-w-2xl p-4 sm:p-8"
           >
             <div className="mb-3 flex justify-center gap-1" aria-hidden="true">
               {[0, 1, 2, 3, 4].map((i) => (

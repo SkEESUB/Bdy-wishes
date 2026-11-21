@@ -43,8 +43,8 @@ export default function PhotoCollage({ onComplete }) {
         tap or use arrow keys to browse through them.
       </p>
 
-      {/* Balanced 4-photo grid: 2 cols on mobile, 4 cols on desktop */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+      {/* Balanced 4-photo grid: 1 col on small screens, 2 cols on mobile, 4 cols on desktop */}
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
         {photos.map((p, i) => {
           const deco = decorations[i % decorations.length];
           const Deco = deco.C;
@@ -67,9 +67,9 @@ export default function PhotoCollage({ onComplete }) {
               className="group relative block cursor-pointer text-left focus:outline-none"
               aria-label={`open photo: ${p.caption}`}
             >
-              <div className="polaroid relative shadow-scrap transition hover:shadow-scrap-lg">
+              <div className="polaroid relative p-2.5 pb-8 sm:p-3 sm:pb-11 shadow-scrap transition hover:shadow-scrap-lg">
                 <span
-                  className="tape absolute -top-3 left-1/2 z-10 h-7 w-20 -translate-x-1/2 -rotate-2 rounded-[2px]"
+                  className="tape absolute -top-3 left-1/2 z-10 h-6 sm:h-7 w-16 sm:w-20 -translate-x-1/2 -rotate-2 rounded-[2px]"
                   aria-hidden="true"
                 />
                 <div className="relative aspect-square w-full overflow-hidden rounded-[3px] bg-blue-soft">
@@ -96,8 +96,8 @@ export default function PhotoCollage({ onComplete }) {
                     <Expand className="text-white" size={22} />
                   </span>
                 </div>
-                <p className="mt-3 font-hand text-lg leading-tight font-bold text-blue-ink">{p.caption}</p>
-                {p.date && <p className="font-cute text-xs text-blue-deep/70">{p.date}</p>}
+                <p className="mt-2.5 sm:mt-3 font-hand text-base sm:text-lg leading-tight font-bold text-blue-ink">{p.caption}</p>
+                {p.date && <p className="font-cute text-[11px] sm:text-xs text-blue-deep/70">{p.date}</p>}
                 <Deco className="sticker absolute" {...deco.props} style={deco.style} />
               </div>
             </motion.button>

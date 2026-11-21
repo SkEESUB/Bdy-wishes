@@ -162,16 +162,16 @@ export default function CandleCake({ onComplete }) {
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             <button
               type="button"
               onClick={() => (blow.listening ? blow.stop() : blow.start())}
               disabled={done}
-              className={`inline-flex items-center gap-2 rounded-full border-[3px] border-white px-5 py-3 font-cute text-lg shadow-scrap transition disabled:opacity-50 ${
+              className={`inline-flex items-center gap-1.5 sm:gap-2 rounded-full border-[3px] border-white px-3.5 sm:px-5 py-2 sm:py-3 font-cute text-sm sm:text-lg shadow-scrap transition disabled:opacity-50 ${
                 blow.listening ? "bg-pink-deep text-white" : "bg-white text-blue-ink hover:bg-pink-soft"
               }`}
             >
-              {blow.listening ? <Mic size={18} /> : <MicOff size={18} />}
+              {blow.listening ? <Mic size={16} /> : <MicOff size={16} />}
               {micLabel[blow.status]}
             </button>
 
@@ -179,9 +179,9 @@ export default function CandleCake({ onComplete }) {
               type="button"
               onClick={manualBlow}
               disabled={done}
-              className="inline-flex items-center gap-2 rounded-full border-[3px] border-white bg-blue-deep px-5 py-3 font-cute text-lg text-white shadow-scrap transition hover:scale-105 disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border-[3px] border-white bg-blue-deep px-4 sm:px-5 py-2 sm:py-3 font-cute text-sm sm:text-lg text-white shadow-scrap transition hover:scale-105 disabled:opacity-50"
             >
-              <Wind size={18} /> Blow for me
+              <Wind size={16} /> Blow for me
             </button>
           </div>
 

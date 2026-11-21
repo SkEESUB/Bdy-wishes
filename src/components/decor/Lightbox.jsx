@@ -91,9 +91,9 @@ export default function Lightbox({
             type="button"
             onClick={onPrev}
             aria-label="Previous photograph"
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-5 z-20 grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-white/90 text-blue-ink shadow-scrap transition hover:scale-110 hover:bg-pink-soft"
+            className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 sm:-translate-x-5 z-20 grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border-2 border-white bg-white/95 text-blue-ink shadow-scrap transition hover:scale-110 hover:bg-pink-soft"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} />
           </button>
         )}
         {hasNext && (
@@ -101,9 +101,9 @@ export default function Lightbox({
             type="button"
             onClick={onNext}
             aria-label="Next photograph"
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-5 z-20 grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-white/90 text-blue-ink shadow-scrap transition hover:scale-110 hover:bg-pink-soft"
+            className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 sm:translate-x-5 z-20 grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full border-2 border-white bg-white/95 text-blue-ink shadow-scrap transition hover:scale-110 hover:bg-pink-soft"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
         )}
       </div>
