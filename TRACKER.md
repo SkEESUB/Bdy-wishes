@@ -15,6 +15,7 @@
 | 11 | Central Configuration | ✅ | Consolidated all content in `src/config/birthday.config.js` |
 | 12 | Production Build & Tests | ✅ | Singlefile build `dist/index.html` (1.62MB), SSR render smoke test 100% pass, content assertions 100% pass |
 | 13 | Skip Countdown Button | ✅ | Added clearly visible "Skip Countdown →" button directly below Continue button with matching pastel scrapbook styling, bypassing countdown to password screen |
+| 14 | Vercel Deployment Fix | ✅ | Fixed error 126: invoked vite via node directly, approved esbuild@0.28.2 postinstall in package.json, added .gitignore and vercel.json, untracked committed node_modules from git |
 
 ## Verification Log (Automated + Manual)
 - `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle).
