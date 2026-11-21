@@ -17,6 +17,7 @@
 | 13 | Skip Countdown Button | ✅ | Added clearly visible "Skip Countdown →" button directly below Continue button with matching pastel scrapbook styling, bypassing countdown to password screen |
 | 14 | Vercel Deployment Fix | ✅ | Fixed error 126: invoked vite via node directly, approved esbuild@0.28.2 postinstall in package.json, added .gitignore and vercel.json, untracked committed node_modules from git |
 | 15 | Visual Interactions Polish | ✅ | Added "HAPPY BIRTHDAY \n Sri Lakshmi ❤️" heading with kinetic handwriting animation, 3D Y-axis flip for all 12 cards with post-flip text reveal, and subtle floating pastel hearts |
+| 16 | Hardened Vercel Deployment | ✅ | Pinned buildCommand in vercel.json directly to node vite.js, allowed generic and pinned esbuild scripts in package.json, regenerated lockfile, and fully verified |
 
 ## Verification Log (Automated + Manual)
 - `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle).
