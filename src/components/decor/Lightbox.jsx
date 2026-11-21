@@ -12,6 +12,7 @@ export default function Lightbox({
   open,
   onClose,
   src,
+  emoji,
   title,
   caption,
   note,
@@ -66,8 +67,15 @@ export default function Lightbox({
                 </div>
               </div>
             ) : (
-              <div className="grid h-56 place-items-center rounded-2xl bg-blue-soft font-cute text-blue-deep">
-                no image yet — add one in the config
+              <div className="relative grid h-44 sm:h-52 place-items-center overflow-hidden rounded-2xl border-2 border-white bg-gradient-to-br from-pink-soft via-blue-soft to-cream p-6 text-center shadow-inner">
+                <div className="relative flex flex-col items-center">
+                  <span className="text-5xl sm:text-6xl drop-shadow-sm select-none" aria-hidden="true">
+                    {emoji || "💌"}
+                  </span>
+                  <span className="mt-2 font-cute text-xs text-blue-deep/75">
+                    A special memory saved in the heart ✨
+                  </span>
+                </div>
               </div>
             )}
 

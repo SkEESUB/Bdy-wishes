@@ -95,7 +95,7 @@ export default function SurpriseGrid({ onComplete }) {
       </div>
 
       {/* Balanced, perfectly aligned grid: 4 cols on desktop, 3 on tablet, 2 on mobile, 1 on small screens */}
-      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 items-stretch">
+      <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-6 items-stretch">
         {cards.map((card, index) => {
           const p = PALETTES[card.palette] ?? PALETTES.pink;
           const isLoved = lovedCards.has(card.id);
@@ -105,7 +105,7 @@ export default function SurpriseGrid({ onComplete }) {
           return (
             <div
               key={card.id}
-              className="relative flex flex-col h-full min-h-[460px] sm:min-h-[510px] [perspective:1200px] cursor-pointer select-none"
+              className="relative flex flex-col h-full min-h-[300px] min-[400px]:min-h-[320px] sm:min-h-[510px] [perspective:1200px] cursor-pointer select-none"
               onClick={() => toggleFlip(card, index)}
               role="button"
               tabIndex={0}
@@ -128,7 +128,7 @@ export default function SurpriseGrid({ onComplete }) {
               >
                 {/* ==================== FRONT FACE ==================== */}
                 <div
-                  className="absolute inset-0 flex flex-col h-full rounded-2xl border-2 border-white p-3 sm:p-5 shadow-scrap transition-shadow hover:shadow-scrap-lg"
+                  className="absolute inset-0 flex flex-col h-full rounded-2xl border-2 border-white p-2.5 sm:p-5 shadow-scrap transition-shadow hover:shadow-scrap-lg"
                   style={{
                     backgroundColor: p.bg,
                     backfaceVisibility: "hidden",
@@ -137,13 +137,13 @@ export default function SurpriseGrid({ onComplete }) {
                 >
                   {/* Tape sticker at top */}
                   <span
-                    className="tape absolute -top-3 left-1/2 z-10 h-6 w-20 -translate-x-1/2 -rotate-1 rounded-[2px]"
+                    className="tape absolute -top-3 left-1/2 z-10 h-6 w-16 sm:w-20 -translate-x-1/2 -rotate-1 rounded-[2px]"
                     aria-hidden="true"
                   />
 
                   {/* 1. FRONT HEADER: Sticker Number, Item Name, Small Decorative Gift Icon */}
                   <div
-                    className="mb-2.5 sm:mb-3 flex items-center justify-between border-b border-dashed pb-2 sm:pb-2.5 gap-1"
+                    className="mb-1.5 sm:mb-3 flex items-center justify-between border-b border-dashed pb-1.5 sm:pb-2.5 gap-1"
                     style={{ borderColor: `${p.edge}44` }}
                   >
                     <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
@@ -153,25 +153,25 @@ export default function SurpriseGrid({ onComplete }) {
                       >
                         {card.number}
                       </span>
-                      <Gift size={14} className="text-pink-deep hidden min-[380px]:inline-block" />
+                      <Gift size={13} className="text-pink-deep hidden min-[380px]:inline-block" />
                     </div>
 
-                    <h3 className="font-hand text-lg sm:text-2xl font-bold tracking-wide text-blue-ink truncate">
+                    <h3 className="font-hand text-base sm:text-2xl font-bold tracking-wide text-blue-ink truncate">
                       {card.itemName}
                     </h3>
 
-                    <span className="font-cute text-[11px] sm:text-xs text-blue-deep/60 hidden min-[420px]:inline shrink-0">
+                    <span className="font-cute text-[10px] sm:text-xs text-blue-deep/60 hidden min-[420px]:inline shrink-0">
                       GIFT {String(card.number).padStart(2, "0")}
                     </span>
                   </div>
 
                   {/* 2. BEAUTIFUL IMAGE REPRESENTING THAT EXACT GIFT */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border-2 border-white bg-white shadow-xs">
+                  <div className="relative aspect-[4/3] w-full max-h-24 min-[380px]:max-h-28 sm:max-h-none overflow-hidden rounded-xl border-2 border-white bg-white shadow-xs">
                     <img
                       src={card.image}
                       alt={card.itemName}
                       loading="lazy"
-                      className="h-full w-full object-contain p-2 transition duration-500 hover:scale-105"
+                      className="h-full w-full object-contain p-1.5 sm:p-2 transition duration-500 hover:scale-105"
                       onError={(e) => {
                         e.currentTarget.style.display = "none";
                         if (e.currentTarget.nextElementSibling) {
@@ -180,29 +180,29 @@ export default function SurpriseGrid({ onComplete }) {
                       }}
                     />
                     <div
-                      className="hidden h-full w-full flex-col items-center justify-center bg-blue-soft p-3 text-center font-cute text-xs text-blue-deep"
+                      className="hidden h-full w-full flex-col items-center justify-center bg-blue-soft p-2 text-center font-cute text-xs text-blue-deep"
                       aria-hidden="true"
                     >
-                      <ImageOff size={24} className="mb-1 opacity-60" />
+                      <ImageOff size={20} className="mb-1 opacity-60" />
                       <span>{card.itemName}</span>
                     </div>
                   </div>
 
                   {/* 3. FRONT SUBTITLE & FLIP HINT */}
-                  <div className="mt-2.5 sm:mt-3.5 flex-1 flex flex-col justify-between">
+                  <div className="mt-1.5 sm:mt-3.5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="font-hand text-lg sm:text-2xl font-bold leading-tight text-blue-ink line-clamp-2">
+                      <h4 className="font-hand text-sm sm:text-2xl font-bold leading-snug sm:leading-tight text-blue-ink line-clamp-2">
                         {card.subtitle}
                       </h4>
-                      <p className="mt-1 sm:mt-1.5 font-cute text-[11px] sm:text-xs text-blue-deep/75 flex items-center gap-1">
+                      <p className="mt-0.5 sm:mt-1.5 font-cute text-[10px] sm:text-xs text-blue-deep/75 flex items-center gap-1">
                         <Sparkles size={11} className="text-pink-deep shrink-0" />
-                        Tap card to flip & reveal note 💌
+                        Tap to flip 💌
                       </p>
                     </div>
 
                     {/* FRONT BOTTOM ACTION */}
                     <div
-                      className="mt-3 sm:mt-4 flex items-center justify-between border-t border-dashed pt-2.5 sm:pt-3 gap-1"
+                      className="mt-1.5 sm:mt-4 flex items-center justify-between border-t border-dashed pt-1.5 sm:pt-3 gap-1"
                       style={{ borderColor: `${p.edge}44` }}
                     >
                       <button
@@ -211,15 +211,15 @@ export default function SurpriseGrid({ onComplete }) {
                           e.stopPropagation();
                           toggleFlip(card, index);
                         }}
-                        className="inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-white bg-white/95 px-2.5 sm:px-3 py-1 font-cute text-[11px] sm:text-xs font-bold text-pink-deep shadow-xs transition hover:bg-pink-pastel active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-full border border-white bg-white/95 px-2 sm:px-3 py-0.5 sm:py-1 font-cute text-[10px] sm:text-xs font-bold text-pink-deep shadow-xs transition hover:bg-pink-pastel active:scale-95 cursor-pointer"
                         aria-label={`Flip gift ${card.number}: ${card.itemName}`}
                       >
-                        <Gift size={12} className="text-pink-deep" />
+                        <Gift size={11} className="text-pink-deep" />
                         <span>Open gift ↺</span>
                       </button>
 
-                      <span className="font-cute text-[10px] sm:text-xs text-pink-deep hidden min-[380px]:inline-flex items-center gap-1">
-                        <Sparkles size={10} /> For Sri Lakshmi
+                      <span className="font-cute text-[10px] sm:text-xs text-pink-deep hidden min-[400px]:inline-flex items-center gap-1">
+                        <Sparkles size={10} /> Sri Lakshmi
                       </span>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ export default function SurpriseGrid({ onComplete }) {
 
                 {/* ==================== BACK FACE (180deg) ==================== */}
                 <div
-                  className="absolute inset-0 flex flex-col h-full rounded-2xl border-2 border-white p-3 sm:p-5 shadow-scrap transition-shadow hover:shadow-scrap-lg"
+                  className="absolute inset-0 flex flex-col h-full rounded-2xl border-2 border-white p-2.5 sm:p-5 shadow-scrap transition-shadow hover:shadow-scrap-lg"
                   style={{
                     backgroundColor: p.bg,
                     backfaceVisibility: "hidden",
@@ -237,13 +237,13 @@ export default function SurpriseGrid({ onComplete }) {
                 >
                   {/* Tape sticker at top */}
                   <span
-                    className="tape absolute -top-3 left-1/2 z-10 h-6 w-20 -translate-x-1/2 -rotate-1 rounded-[2px]"
+                    className="tape absolute -top-3 left-1/2 z-10 h-6 w-16 sm:w-20 -translate-x-1/2 -rotate-1 rounded-[2px]"
                     aria-hidden="true"
                   />
 
                   {/* 1. BACK HEADER */}
                   <div
-                    className="mb-2.5 sm:mb-3 flex items-center justify-between border-b border-dashed pb-2 sm:pb-2.5 gap-1"
+                    className="mb-1.5 sm:mb-3 flex items-center justify-between border-b border-dashed pb-1.5 sm:pb-2.5 gap-1"
                     style={{ borderColor: `${p.edge}44` }}
                   >
                     <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
@@ -253,14 +253,14 @@ export default function SurpriseGrid({ onComplete }) {
                       >
                         {card.number}
                       </span>
-                      <Gift size={14} className="text-pink-deep hidden min-[380px]:inline-block" />
+                      <Gift size={13} className="text-pink-deep hidden min-[380px]:inline-block" />
                     </div>
 
-                    <h3 className="font-hand text-lg sm:text-2xl font-bold tracking-wide text-blue-ink truncate">
+                    <h3 className="font-hand text-base sm:text-2xl font-bold tracking-wide text-blue-ink truncate">
                       {card.itemName}
                     </h3>
 
-                    <span className="sticker rounded-full bg-white/80 px-2 py-0.5 font-cute text-[10px] sm:text-[11px] text-pink-deep shrink-0">
+                    <span className="sticker rounded-full bg-white/80 px-1.5 sm:px-2 py-0.5 font-cute text-[9px] sm:text-[11px] text-pink-deep shrink-0">
                       Note 💌
                     </span>
                   </div>
@@ -268,8 +268,8 @@ export default function SurpriseGrid({ onComplete }) {
                   {/* 2. BACK BODY: Subtitle and SEPARATELY ANIMATED DESCRIPTION */}
                   <div className="flex-1 flex flex-col justify-between overflow-y-auto pr-0.5 sm:pr-1">
                     <div>
-                      <div className="flex items-center gap-1 sm:gap-1.5 text-blue-deep font-hand text-lg sm:text-2xl font-bold leading-tight">
-                        <Sparkles size={14} className="text-pink-deep shrink-0" />
+                      <div className="flex items-center gap-1 sm:gap-1.5 text-blue-deep font-hand text-sm sm:text-2xl font-bold leading-snug sm:leading-tight">
+                        <Sparkles size={12} className="text-pink-deep shrink-0" />
                         <h4>{card.subtitle}</h4>
                       </div>
 
@@ -282,9 +282,9 @@ export default function SurpriseGrid({ onComplete }) {
                           delay: isFlipped ? 0.35 : 0,
                           ease: "easeOut",
                         }}
-                        className="paper paper-dashed mt-2 sm:mt-3 p-2.5 sm:p-4 bg-white/95 border border-white"
+                        className="paper paper-dashed mt-1.5 sm:mt-3 p-2 sm:p-4 bg-white/95 border border-white max-h-[140px] sm:max-h-none overflow-y-auto"
                       >
-                        <p className="font-body text-xs sm:text-[15px] leading-relaxed text-blue-ink/90 whitespace-pre-line">
+                        <p className="font-body text-[11px] min-[400px]:text-xs sm:text-[15px] leading-snug sm:leading-relaxed text-blue-ink/90 whitespace-pre-line">
                           "{card.description}"
                         </p>
                       </motion.div>
@@ -292,7 +292,7 @@ export default function SurpriseGrid({ onComplete }) {
 
                     {/* BACK BOTTOM ACTION: Flip Back button + Cherished heart */}
                     <div
-                      className="mt-3 sm:mt-4 flex items-center justify-between border-t border-dashed pt-2.5 sm:pt-3 gap-1"
+                      className="mt-1.5 sm:mt-4 flex items-center justify-between border-t border-dashed pt-1.5 sm:pt-3 gap-1"
                       style={{ borderColor: `${p.edge}44` }}
                     >
                       <button
@@ -301,10 +301,10 @@ export default function SurpriseGrid({ onComplete }) {
                           e.stopPropagation();
                           toggleFlip(card, index);
                         }}
-                        className="inline-flex items-center gap-1 rounded-full border border-white bg-white/95 px-2 sm:px-3 py-1 font-cute text-[10px] sm:text-xs font-bold text-blue-ink shadow-xs transition hover:bg-blue-soft active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-full border border-white bg-white/95 px-1.5 sm:px-3 py-0.5 sm:py-1 font-cute text-[9px] sm:text-xs font-bold text-blue-ink shadow-xs transition hover:bg-blue-soft active:scale-95 cursor-pointer"
                         aria-label={`Flip back gift ${card.number}`}
                       >
-                        <RotateCw size={11} className="text-blue-deep" />
+                        <RotateCw size={10} className="text-blue-deep" />
                         <span>Flip back ↺</span>
                       </button>
 
@@ -314,11 +314,11 @@ export default function SurpriseGrid({ onComplete }) {
                           e.stopPropagation();
                           toggleHeart(card, index);
                         }}
-                        className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 sm:px-3 py-1 font-cute text-[10px] sm:text-xs font-bold text-pink-deep border border-white transition hover:bg-pink-pastel active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1 rounded-full bg-white/90 px-1.5 sm:px-3 py-0.5 sm:py-1 font-cute text-[9px] sm:text-xs font-bold text-pink-deep border border-white transition hover:bg-pink-pastel active:scale-95 cursor-pointer"
                         aria-label="Cherish this gift"
                       >
                         <Heart
-                          size={11}
+                          size={10}
                           className={isLoved ? "fill-pink-deep text-pink-deep" : "text-pink-deep"}
                         />
                         <span>{isLoved ? "Cherished 🤍" : "Love this"}</span>

@@ -33,6 +33,9 @@ export default function VideoGallery({ onComplete }) {
   const close = () => {
     if (videoRef.current) {
       videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+      videoRef.current.removeAttribute("src");
+      videoRef.current.load();
     }
     setIsPlaying(false);
     setActive(null);
@@ -41,8 +44,14 @@ export default function VideoGallery({ onComplete }) {
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
-      videoRef.current.play();
-      setIsPlaying(true);
+      const p = videoRef.current.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying(true))
+          .catch((err) => {
+            console.warn("Video play error:", err);
+            setIsPlaying(false);
+          });
+      }
     } else {
       videoRef.current.pause();
       setIsPlaying(false);
@@ -106,14 +115,14 @@ export default function VideoGallery({ onComplete }) {
       <Modal open={!!active} onClose={close} label={active?.title || "video"} maxWidth="max-w-3xl">
         {active && (
           <div>
-            <div className="relative overflow-hidden rounded-2xl border-2 border-white bg-blue-ink/95 shadow-scrap-lg">
+            <div className="relative overflow-hidden rounded-2xl border-2 border-white bg-blue-ink/95 shadow-scrap-lg flex items-center justify-center">
               <video
                 ref={videoRef}
                 key={`${active.id}-${fallback ? "remote" : "local"}`}
-                className="aspect-video w-full"
+                className="max-h-[65vh] w-full object-contain aspect-video"
                 controls
                 playsInline
-                preload="none"
+                preload="metadata"
                 autoPlay={false}
                 poster={active.poster}
                 src={fallback ? active.remoteSrc : active.src}

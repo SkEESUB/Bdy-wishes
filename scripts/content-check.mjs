@@ -44,9 +44,12 @@ t("12 unique surprise ids", new Set(cfg.surprises.map((s) => s.id)).size === 12)
 t("12 unique surprise images configured", new Set(cfg.surprises.map((s) => s.image)).size === 12, `${new Set(cfg.surprises.map((s) => s.image)).size} unique images`);
 t("12 personal Telugu-English messages in HTML", html.SurpriseGrid.includes("Flowers anni") && html.SurpriseGrid.includes("sweetness inka") && html.SurpriseGrid.includes("mana bond kuda"), "Telugu phrases verified");
 t("EXACTLY 4 polaroid photo memories", (html.PhotoCollage.match(/polaroid/g) || []).length === 4 && cfg.gallery.length === 4, `${cfg.gallery.length} polaroids`);
-t("5 memory markers", (html.MemoryMap.match(/open memory:/g) || []).length === cfg.memoryMap.length, `${(html.MemoryMap.match(/open memory:/g) || []).length}`);
+t("10 memory markers", (html.MemoryMap.match(/open memory:/g) || []).length === 10 && cfg.memoryMap.length === 10, `${(html.MemoryMap.match(/open memory:/g) || []).length}`);
 t("EXACTLY TWO video cards", (html.VideoGallery.match(/play video:/g) || []).length === 2 && cfg.videos.length === 2, `${(html.VideoGallery.match(/play video:/g) || []).length} video cards`);
-t("TWO sample songs in config", cfg.music.songs.length === 2, `${cfg.music.songs.length} sample songs`);
+t("FOUR songs in config", cfg.music.songs.length === 4, `${cfg.music.songs.length} songs`);
+t("Yellow quote directly below music player", html.VinylPlayer.includes("Yellow") && html.VinylPlayer.includes("colours") && html.VinylPlayer.includes("world"));
+t("Final Memories Map message present", html.MemoryMap.includes("OUR STORY IS JUST BEGINNING ❤️") && html.MemoryMap.includes("One first message, one first call"));
+t("10 memory descriptions complete in config", cfg.memoryMap.every((m) => m.description && m.description.length > 20));
 t("5 candle flames", (html.CandleCake.match(/anim-flicker/g) || []).length === cfg.candles.count, `${(html.CandleCake.match(/anim-flicker/g) || []).length}`);
 t("cake cutting removed", !html.CakeCutting);
 t("wish tree removed", !html.WishTree);

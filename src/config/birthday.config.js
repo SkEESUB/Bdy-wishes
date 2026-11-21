@@ -318,8 +318,9 @@ export const birthday = {
     afterLabel: "reopen the box",
   },
 
-  /* --------------------------------------------------------- 11 MUSIC (TWO SAMPLE SONGS) */
+  /* --------------------------------------------------------- 11 MUSIC (FOUR SONGS) */
   music: {
+    yellowQuote: "In a world full of colours, you're my Yellow. 💛",
     songs: [
       {
         id: "song-1",
@@ -327,6 +328,7 @@ export const birthday = {
         artist: "Handmade Music Box Melody",
         src: "/assets/music/sample-song-01.mp3",
         durationLabel: "looping melody",
+        description: "A soft, chiming music box melody woven with birthday warmth.",
       },
       {
         id: "song-2",
@@ -334,6 +336,23 @@ export const birthday = {
         artist: "Birthday Acoustic Box",
         src: "/assets/music/sample-song-02.mp3",
         durationLabel: "gentle loop",
+        description: "Gentle acoustic strings that make every moment feel warm and calm.",
+      },
+      {
+        id: "song-3",
+        title: "Sweet Yellow Memories",
+        artist: "Acoustic Melody For You",
+        src: "/assets/music/sample-song-03.mp3",
+        durationLabel: "sweet melody",
+        description: "A bright, joyful acoustic harmony dedicated to your beautiful smile.",
+      },
+      {
+        id: "song-4",
+        title: "Our Special Tune",
+        artist: "Heartfelt Keepsake",
+        src: "/assets/music/sample-song-04.mp3",
+        durationLabel: "keepsake",
+        description: "A sweet, heartfelt acoustic note to celebrate your special day.",
       },
     ],
     note: "Replace with your own MP3 files in public/assets/music/",
@@ -361,14 +380,126 @@ export const birthday = {
     },
   ],
 
-  /* ------------------------------------------------------ 13 MEMORY MAP */
+  /* ------------------------------------------------------ 13 MEMORY MAP (10 PERSONAL STORY STAGES) */
   memoryMap: [
-    { id: "m1", name: "The Café Corner", emoji: "☕", x: 14, y: 62, image: memory01, caption: "Where the first conversation ran three hours long.", message: "You ordered the same thing twice and pretended it was a coincidence." },
-    { id: "m2", name: "Picnic Hill", emoji: "🧺", x: 34, y: 38, image: memory02, caption: "Peach-coloured sky, wind everywhere.", message: "You said 'we should do this more often'. We said it four more times that year." },
-    { id: "m3", name: "The Shoreline", emoji: "🐚", x: 55, y: 70, image: memory03, caption: "Cold feet, warm everything else.", message: "Forty-one shells. We left the forty-first because it was 'too pretty to take'." },
-    { id: "m4", name: "The Fair", emoji: "🎡", x: 74, y: 44, image: memory04, caption: "Lights, sugar, and one brave ferris wheel.", message: "You held my sleeve the entire ride and denied it immediately afterwards." },
-    { id: "m5", name: "The Long Road", emoji: "🚐", x: 89, y: 66, image: memory01, caption: "Wrong turn, best day.", message: "No signal, one shared bag of crisps, and a playlist made entirely of your favourites." },
+    {
+      id: "m1",
+      number: 1,
+      name: "Our First Message",
+      emoji: "💬",
+      x: 27,
+      y: 10.4,
+      caption: "Where it all started",
+      description:
+        "Every beautiful story has a beginning, and ours started with that first message. It was just a simple text back then, but today it has become the beginning of a very special connection.",
+    },
+    {
+      id: "m2",
+      number: 2,
+      name: "Our First Conversation",
+      emoji: "🦋",
+      x: 73,
+      y: 19.3,
+      caption: "A meaningful connection",
+      description:
+        "I still love the fact that a random conversation turned into something so meaningful. We started as strangers, but slowly became people who love talking to each other.",
+    },
+    {
+      id: "m3",
+      number: 3,
+      name: "Our First Call",
+      emoji: "📞",
+      x: 27,
+      y: 28.1,
+      caption: "Hearing your voice",
+      description:
+        "That first call was more than just a phone conversation. It was the beginning of hearing your voice, sharing little things, and creating moments that I wish could last a little longer.",
+    },
+    {
+      id: "m4",
+      number: 4,
+      name: "The First Time Hearing Your Voice",
+      emoji: "🎧",
+      x: 73,
+      y: 37.0,
+      caption: "Something felt different",
+      description:
+        "Texts are beautiful, but hearing your voice for the first time felt different. Somehow, a simple voice made this connection feel even more special.",
+    },
+    {
+      id: "m5",
+      number: 5,
+      name: "Our First College Meeting",
+      emoji: "🌸",
+      x: 27,
+      y: 45.9,
+      caption: "Finally seeing you in person",
+      description:
+        "After all those messages and calls, finally seeing you in person was a special moment. We met only once, but that little meeting became a memory worth keeping forever.",
+    },
+    {
+      id: "m6",
+      number: 6,
+      name: "One Meeting, Endless Memories",
+      emoji: "📸",
+      x: 73,
+      y: 54.8,
+      caption: "Saved in my heart",
+      description:
+        "We didn't take pictures together that day, but I still have that moment saved in my heart. Not every beautiful memory needs a photograph.",
+    },
+    {
+      id: "m7",
+      number: 7,
+      name: "From Strangers To Someone Special",
+      emoji: "❤️",
+      x: 27,
+      y: 63.7,
+      caption: "An important part of everyday life",
+      description:
+        "It's amazing how someone who was once a stranger can slowly become such an important part of your everyday life. That's exactly what happened with you.",
+    },
+    {
+      id: "m8",
+      number: 8,
+      name: "My Little Healer",
+      emoji: "🫶",
+      x: 73,
+      y: 72.6,
+      caption: "An unexpected comfort",
+      description:
+        "Your messages, your calls, and your presence have a special way of making my difficult days feel lighter. You became an unexpected comfort in my life.",
+    },
+    {
+      id: "m9",
+      number: 9,
+      name: "The Beginning Of Many Firsts",
+      emoji: "✨",
+      x: 27,
+      y: 81.5,
+      caption: "Creating more firsts together",
+      description:
+        "Our first message, first call, and first meeting are already special memories. I hope we get to create many more beautiful firsts together.",
+    },
+    {
+      id: "m10",
+      number: 10,
+      name: "More Than Just Memories",
+      emoji: "💗",
+      x: 73,
+      y: 90.4,
+      caption: "I'm glad I met you",
+      description:
+        "Maybe we don't have many pictures together, but we have conversations, little moments, and memories that mean a lot to me. I'm glad I met you.",
+    },
   ],
+
+  /* ------------------------------------------------- 14 MEMORY MAP FINAL MESSAGE */
+  memoryMapFinalMessage: {
+    title: "OUR STORY IS JUST BEGINNING ❤️",
+    message:
+      "One first message, one first call, one first meeting... and a thousand reasons to smile. Happy Birthday, My Special Person! 🎂",
+  },
 };
 
 export default birthday;

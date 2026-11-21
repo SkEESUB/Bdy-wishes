@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Pause, Play, Volume2, VolumeX, Music4, AlertCircle, Disc } from "lucide-react";
 import Section from "./decor/Section.jsx";
@@ -15,12 +15,12 @@ const fmt = (s) => {
 };
 
 /**
- * SECTION 07 — Vinyl record player with two sample songs.
- * Supports switching between two songs, local MP3 playback, and Web Audio
+ * SECTION 07 — Vinyl record player with four personal songs.
+ * Supports switching between four songs, local MP3 playback, and Web Audio
  * music box synthesis fallback. Never autoplays.
  */
 export default function VinylPlayer({ onComplete }) {
-  const songs = cfg.music.songs || [
+  const songs = cfg.music?.songs || [
     {
       id: "song-1",
       title: "Happy Birthday Music Box",
@@ -35,6 +35,20 @@ export default function VinylPlayer({ onComplete }) {
       src: "/assets/music/sample-song-02.mp3",
       durationLabel: "gentle loop",
     },
+    {
+      id: "song-3",
+      title: "Sweet Yellow Memories",
+      artist: "Acoustic Melody For You",
+      src: "/assets/music/sample-song-03.mp3",
+      durationLabel: "sweet melody",
+    },
+    {
+      id: "song-4",
+      title: "Our Special Tune",
+      artist: "Heartfelt Keepsake",
+      src: "/assets/music/sample-song-04.mp3",
+      durationLabel: "keepsake",
+    },
   ];
 
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -45,64 +59,118 @@ export default function VinylPlayer({ onComplete }) {
   const [mode, setMode] = useState(currentSong.src ? "file" : "melody");
   const [playing, setPlaying] = useState(false);
   const [pos, setPos] = useState(0);
-  const [duration, setDuration] = useState(currentSong.src ? 0 : MELODY_DURATION);
+  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.7);
   const [muted, setMuted] = useState(false);
   const [error, setError] = useState(null);
   const reduce = useReducedMotion();
   const [notes, setNotes] = useState([]);
 
-  // progress ticker
+  // Progress ticker for melody synthesizer fallback
   useEffect(() => {
-    if (!playing) return undefined;
+    if (!playing || mode !== "melody") return undefined;
     const id = setInterval(() => {
-      if (mode === "file" && audioRef.current) {
-        setPos(audioRef.current.currentTime || 0);
-        if (Number.isFinite(audioRef.current.duration)) setDuration(audioRef.current.duration);
-      } else if (melodyRef.current) {
+      if (melodyRef.current) {
         setPos(melodyRef.current.getPosition());
       }
-    }, 200);
+    }, 250);
     return () => clearInterval(id);
   }, [playing, mode]);
 
+  // Clean stop and release on unmount
+  useEffect(() => {
+    return () => {
+      melodyRef.current?.stop();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.removeAttribute("src");
+        audioRef.current.load();
+      }
+    };
+  }, []);
+
+  const stopCurrent = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+    melodyRef.current?.stop();
+    setPlaying(false);
+  }, []);
+
   const selectTrack = (idx) => {
     if (idx === currentIdx) return;
-    if (playing) {
-      if (mode === "file" && audioRef.current) audioRef.current.pause();
-      else melodyRef.current?.pause();
-      setPlaying(false);
-    }
+    const wasPlaying = playing;
+    stopCurrent();
+
     setCurrentIdx(idx);
     setPos(0);
+    setDuration(0);
     setError(null);
+
     const nextSong = songs[idx];
     setMode(nextSong.src ? "file" : "melody");
     sfx.key();
+
+    // If song was actively playing, cleanly start the new song
+    if (wasPlaying && nextSong.src && audioRef.current) {
+      audioRef.current.src = nextSong.src;
+      audioRef.current.load();
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setPlaying(true))
+          .catch((err) => {
+            console.warn("Audio play rejected:", err);
+            setError("Playback failed — click play to start.");
+            setPlaying(false);
+          });
+      }
+    }
   };
 
   const toggle = () => {
     onComplete?.();
     if (playing) {
-      if (mode === "file" && audioRef.current) audioRef.current.pause();
-      else melodyRef.current?.pause();
+      if (mode === "file" && audioRef.current) {
+        audioRef.current.pause();
+      } else {
+        melodyRef.current?.pause();
+      }
       setPlaying(false);
       return;
     }
+
     sfx.pop();
     if (mode === "file" && audioRef.current) {
-      audioRef.current.play().catch(() => {
-        setError("Local song file not ready — playing melodic music box version.");
-        setMode("melody");
-        if (!melodyRef.current) melodyRef.current = createMelodyPlayer();
-        melodyRef.current.play();
-        setDuration(MELODY_DURATION);
-      });
-      setPlaying(true);
+      // Ensure source is current
+      if (!audioRef.current.src || !audioRef.current.src.includes(currentSong.src)) {
+        audioRef.current.src = currentSong.src;
+        audioRef.current.load();
+      }
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setPlaying(true);
+            setError(null);
+          })
+          .catch((err) => {
+            console.warn("Local song file playback issue:", err);
+            setError("Local song not ready — playing music box melody.");
+            setMode("melody");
+            if (!melodyRef.current) melodyRef.current = createMelodyPlayer();
+            melodyRef.current.play();
+            setDuration(MELODY_DURATION);
+            setPlaying(true);
+          });
+      }
       return;
     }
+
     if (!melodyRef.current) melodyRef.current = createMelodyPlayer();
     melodyRef.current.play();
+    setDuration(MELODY_DURATION);
     setPlaying(true);
   };
 
@@ -115,10 +183,14 @@ export default function VinylPlayer({ onComplete }) {
   const seek = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    const next = ratio * (duration || MELODY_DURATION);
+    const targetDuration = duration || (mode === "melody" ? MELODY_DURATION : 0);
+    const next = ratio * targetDuration;
     setPos(next);
-    if (mode === "file" && audioRef.current) audioRef.current.currentTime = next;
-    else melodyRef.current?.seek(next);
+    if (mode === "file" && audioRef.current) {
+      audioRef.current.currentTime = next;
+    } else {
+      melodyRef.current?.seek(next);
+    }
   };
 
   // floating music notes while playing
@@ -138,15 +210,8 @@ export default function VinylPlayer({ onComplete }) {
     return () => clearInterval(id);
   }, [playing, reduce]);
 
-  useEffect(
-    () => () => {
-      melodyRef.current?.stop();
-      if (audioRef.current) audioRef.current.pause();
-    },
-    []
-  );
-
-  const pct = duration > 0 ? Math.min(100, (pos / duration) * 100) : 0;
+  const effectiveDuration = duration > 0 ? duration : (mode === "melody" ? MELODY_DURATION : 0);
+  const pct = effectiveDuration > 0 ? Math.min(100, (pos / effectiveDuration) * 100) : 0;
 
   return (
     <Section id="music" number={7} title="Our Little Record" kicker="press play whenever you like" palette="#6FA8D6">
@@ -170,8 +235,8 @@ export default function VinylPlayer({ onComplete }) {
           </div>
 
           <div className="paper paper-dashed p-5 sm:p-7 shadow-scrap">
-            {/* Track Selector Tabs */}
-            <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+            {/* Track Selector Tabs — All 4 songs */}
+            <div className="mb-4 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
               {songs.map((song, idx) => {
                 const isSelected = idx === currentIdx;
                 return (
@@ -179,14 +244,16 @@ export default function VinylPlayer({ onComplete }) {
                     key={song.id}
                     type="button"
                     onClick={() => selectTrack(idx)}
-                    className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3.5 py-1.5 font-cute text-xs font-bold transition cursor-pointer ${
+                    className={`inline-flex items-center gap-1.5 rounded-full border-2 px-3 sm:px-3.5 py-1 sm:py-1.5 font-cute text-xs font-bold transition cursor-pointer ${
                       isSelected
-                        ? "border-pink-deep bg-pink-deep text-white shadow-xs"
+                        ? "border-pink-deep bg-pink-deep text-white shadow-xs scale-105"
                         : "border-white bg-white/80 text-blue-deep hover:bg-pink-pastel"
                     }`}
+                    aria-label={`Select Track ${idx + 1}: ${song.title}`}
+                    aria-pressed={isSelected}
                   >
-                    <Disc size={13} className={isSelected ? "animate-spin" : ""} />
-                    Track {idx + 1}: {song.title.split(" ")[0]}
+                    <Disc size={13} className={isSelected && playing ? "animate-spin" : ""} />
+                    Track {idx + 1}
                   </button>
                 );
               })}
@@ -212,7 +279,7 @@ export default function VinylPlayer({ onComplete }) {
                     />
                   ))}
                   <div className="relative grid h-16 w-16 place-items-center rounded-full border-2 border-white bg-pink-pastel p-1 text-center shadow-xs">
-                    <span className="font-cute text-[9px] font-bold text-pink-deep">
+                    <span className="font-cute text-[9px] font-bold text-pink-deep line-clamp-2">
                       {currentSong.title.slice(0, 14)}
                     </span>
                     <span className="h-2 w-2 rounded-full bg-blue-ink" />
@@ -262,7 +329,7 @@ export default function VinylPlayer({ onComplete }) {
                 </div>
                 <div className="mt-1 flex justify-between font-ui text-[11px] text-blue-ink/60">
                   <span>{fmt(pos)}</span>
-                  <span>{currentSong.durationLabel || "looping"} · {fmt(duration)}</span>
+                  <span>{currentSong.durationLabel || "looping"} · {fmt(effectiveDuration)}</span>
                 </div>
 
                 <div className="mt-4 flex items-center gap-3">
@@ -317,13 +384,53 @@ export default function VinylPlayer({ onComplete }) {
           </div>
         </div>
 
-        {/* hidden audio element for local mp3 */}
+        {/* Directly below the music player: Yellow Quote */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full max-w-lg text-center px-2"
+        >
+          <div className="paper paper-dashed relative mx-auto inline-block rounded-2xl border-2 border-[#F6E7B9] bg-[#FFFDF5]/95 px-5 py-3 sm:px-7 sm:py-3.5 shadow-scrap">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-lg sm:text-xl select-none" aria-hidden="true">💛</span>
+              <p className="font-hand text-xl sm:text-2xl font-bold tracking-wide text-blue-ink">
+                {cfg.music.yellowQuote || "In a world full of colours, you're my Yellow. 💛"}
+              </p>
+              <span className="text-lg sm:text-xl select-none" aria-hidden="true">💛</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* hidden single audio element for current song with preload="none" */}
         {currentSong.src && (
           <audio
             ref={audioRef}
             src={currentSong.src}
             preload="none"
-            onEnded={() => setPlaying(false)}
+            playsInline
+            onTimeUpdate={(e) => {
+              if (mode === "file") {
+                setPos(e.currentTarget.currentTime || 0);
+              }
+            }}
+            onLoadedMetadata={(e) => {
+              if (Number.isFinite(e.currentTarget.duration)) {
+                setDuration(e.currentTarget.duration);
+              }
+            }}
+            onDurationChange={(e) => {
+              if (Number.isFinite(e.currentTarget.duration)) {
+                setDuration(e.currentTarget.duration);
+              }
+            }}
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+            onEnded={() => {
+              setPlaying(false);
+              setPos(0);
+            }}
             onError={() => {
               setMode("melody");
             }}
@@ -332,7 +439,7 @@ export default function VinylPlayer({ onComplete }) {
 
         <div className="flex flex-wrap items-center justify-center gap-2 font-cute text-sm text-blue-deep/80">
           <Sparkle size={14} className="text-pink-deep" />
-          <span>replace files anytime in <code className="rounded bg-white px-1.5 py-0.5">public/assets/music/</code></span>
+          <span>four special songs · select anytime above</span>
           <Heart size={14} color="#E48BB0" />
         </div>
       </div>

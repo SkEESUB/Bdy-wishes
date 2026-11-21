@@ -18,9 +18,21 @@
 | 14 | Vercel Deployment Fix | ✅ | Fixed error 126: invoked vite via node directly, approved esbuild@0.28.2 postinstall in package.json, added .gitignore and vercel.json, untracked committed node_modules from git |
 | 15 | Visual Interactions Polish | ✅ | Added "HAPPY BIRTHDAY \n Sri Lakshmi ❤️" heading with kinetic handwriting animation, 3D Y-axis flip for all 12 cards with post-flip text reveal, and subtle floating pastel hearts |
 | 16 | Hardened Vercel Deployment | ✅ | Pinned buildCommand in vercel.json directly to node vite.js, allowed generic and pinned esbuild scripts in package.json, regenerated lockfile, and fully verified |
+| 17 | Four-Song Audio Player & Yellow Quote | ✅ | Upgraded VinylPlayer with individual track selection for all 4 songs (`sample-song-01.mp3` to `sample-song-04.mp3`), lazy loading (`preload="none"`), clean track switching with previous song termination, volume/progress/duration controls, and added the handwritten pastel Yellow quote directly below |
+| 18 | Dual-Video Gallery & Mobile Performance | ✅ | Exactly 2 videos (`sample-video-01.mp4`, `sample-video-02.mp4`) with `preload="metadata"`, `playsInline`, native full-screen/timeline/volume controls, portrait and landscape aspect ratio support, clean resource release on modal close, and zero autoplay |
+| 19 | Mobile Surprise Cards Height Reduction | ✅ | Removed oversized min-height (`min-h-[460px]`), applied content-driven mobile dimensions (`min-h-[300px]`), balanced 2-column mobile / 1-column narrow / 3-4 column desktop grid, proportional image scaling, readable complete descriptions, and 100% desktop design preservation |
+| 20 | Memories Map 10 Personal Story Stages | ✅ | Naturally extended the winding dotted trail vertically (`viewBox="0 0 600 1350"`), added all 10 unshortened personal story stages with dedicated emoji pins, non-overlapping undulating marker coordinates, full description Lightbox reveal with cute framed illustrations, and an emotional final message card |
+| 21 | Central Configuration Integration | ✅ | Single source of truth in `birthday.config.js` storing all 4 songs, 2 videos, yellow quote, 10 memory titles, complete descriptions, and finale message |
 
 ## Verification Log (Automated + Manual)
-- `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle).
+- `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle, 1.64MB).
+- **Media Assets Verification**:
+  - `sample-song-01.mp3` (3,597,419 bytes)
+  - `sample-song-02.mp3` (4,336,657 bytes)
+  - `sample-song-03.mp3` (10,530,269 bytes)
+  - `sample-song-04.mp3` (361,149 bytes)
+  - `sample-video-01.mp4` (1,411,040 bytes)
+  - `sample-video-02.mp4` (3,280,927 bytes)
 - **Render smoke test** (`scripts/render-check.mjs`):
   All 14 active scenes render cleanly in isolation:
   - `Countdown`
@@ -39,24 +51,25 @@
   - `App`
   → `ALL COMPONENTS RENDER OK`.
 - **Content assertions** (`scripts/content-check.mjs`):
-  - 12 personalized surprise cards rendered with 12 unique item names, 12 unique subtitles, 12 unique IDs, and 12 unique images.
-  - 12 personal Telugu-English messages verified in HTML underneath images.
+  - 12 personalized surprise cards rendered with 12 unique item names, subtitles, IDs, and images.
+  - 12 personal Telugu-English messages verified in HTML.
   - EXACTLY 4 polaroid photo memories rendered using user's 4 actual uploaded photographs.
-  - EXACTLY TWO video cards rendered.
-  - TWO sample songs in config.
+  - EXACTLY TWO video cards rendered (`sample-video-01.mp4`, `sample-video-02.mp4`).
+  - FOUR songs in config (`sample-song-01.mp3` to `sample-song-04.mp3`).
+  - Yellow quote rendered directly below music player ("In a world full of colours, you're my Yellow. 💛").
+  - 10 personal memory markers and complete descriptions verified.
+  - Final Memories Map message rendered ("OUR STORY IS JUST BEGINNING ❤️").
   - 5 candle flames on CandleCake.
   - Cake cutting, Wish tree, and Love coupons remain completely removed.
   - Countdown 4 units intact with target `2026-11-24T00:00:00+05:30`.
-  - Continue button present on countdown directly below timer.
+  - Continue button and Skip Countdown button present.
   - Password is `mylove`.
   - Recipient name is `Sri Lakshmi` across all user-facing content.
   - No autoplay attribute anywhere.
   → `ALL CONTENT CHECKS PASSED`.
-- **Browser verification**:
-  - Countdown screen: Compact illustration, fits desktop viewport, Continue button visible directly below countdown.
-  - Password "mylove" unlocks to scrapbook.
-  - Header: "Happy Birthday, Sri Lakshmi!".
-  - Polaroids & Paper: Exactly 4 polaroid photo cards with user's uploaded photographs.
-  - 12 Surprises: Each card follows exact 4-tier structure (Item Name heading, dedicated image, subtitle, and readable Telugu-English message).
-  - Vinyl Player: Two sample tracks toggleable.
-  - Video Gallery: Exactly two videos with play/pause/close controls.
+- **Responsive Viewport Verification (`scripts/verify-upgrades.mjs`)**:
+  - `320px`: 1-column layout for narrow viewports, no clipped text, readable flip notes.
+  - `360px`, `375px`, `390px`, `430px`: Compact 2-column mobile surprise cards (`min-h-[300px]`), balanced gaps, proportional image heights, readable descriptions.
+  - `768px`: Tablet responsive view, smooth vertical memory map scrolling.
+  - `1024px`, `1366px`, `1920px`: Preserved desktop layouts (`sm:min-h-[510px]`, 3-4 column grid, identical visual aesthetics).
+  → `ALL UPGRADE VERIFICATIONS PASSED`.
