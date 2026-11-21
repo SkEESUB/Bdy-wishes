@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Play, Pause, Film, AlertTriangle, X } from "lucide-react";
 import Section from "./decor/Section.jsx";
@@ -29,6 +29,20 @@ export default function VideoGallery({ onComplete }) {
     sfx.pop();
     onComplete?.();
   };
+
+  // When modal opens via user click, begin playback smoothly
+  useEffect(() => {
+    if (active && videoRef.current) {
+      const p = videoRef.current.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying(true))
+          .catch((err) => {
+            console.log("Playback awaiting manual interaction:", err);
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, [active]);
 
   const close = () => {
     if (videoRef.current) {

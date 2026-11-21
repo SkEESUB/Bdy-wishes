@@ -23,16 +23,22 @@
 | 19 | Mobile Surprise Cards Height Reduction | ✅ | Removed oversized min-height (`min-h-[460px]`), applied content-driven mobile dimensions (`min-h-[300px]`), balanced 2-column mobile / 1-column narrow / 3-4 column desktop grid, proportional image scaling, readable complete descriptions, and 100% desktop design preservation |
 | 20 | Memories Map 10 Personal Story Stages | ✅ | Naturally extended the winding dotted trail vertically (`viewBox="0 0 600 1350"`), added all 10 unshortened personal story stages with dedicated emoji pins, non-overlapping undulating marker coordinates, full description Lightbox reveal with cute framed illustrations, and an emotional final message card |
 | 21 | Central Configuration Integration | ✅ | Single source of truth in `birthday.config.js` storing all 4 songs, 2 videos, yellow quote, 10 memory titles, complete descriptions, and finale message |
+| 22 | Compact Surprise Cards Desktop & Mobile | ✅ | Eliminated excessive 510px desktop min-height and empty vertical space, applied content-driven ~300-335px heights across desktop and mobile, proportioned images, preserved full Telugu-English text readability, and 3D flip |
+| 23 | Birthday Letter Handwriting & Continuation | ✅ | Sequential word-by-word handwriting animation (`0.032s` stagger, opacity + smooth 5px rise) revealing message as if penned in real-time, added continuation paragraph for Sri Lakshmi, and configurable in config |
+| 24 | Happy Birthday Writing Reveal Sequence | ✅ | GSAP writing reveal sequence: 1. HAPPY appears first, 2. BIRTHDAY follows, 3. Sri Lakshmi appears underneath, 4. Heart pops last with spring back-bounce. Full multicolour palette preserved |
+| 25 | Real Video Preview Images & Card Polish | ✅ | Extracted high-quality frame posters from actual MP4s (`poster-01.jpg`, `poster-02.jpg`), added hover zoom, centered play badge, and auto-play trigger upon modal opening with clean release on close |
 
 ## Verification Log (Automated + Manual)
-- `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle, 1.64MB).
-- **Media Assets Verification**:
+- `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle, 1.67MB).
+- **Media & Thumbnail Assets Verification**:
   - `sample-song-01.mp3` (3,597,419 bytes)
   - `sample-song-02.mp3` (4,336,657 bytes)
   - `sample-song-03.mp3` (10,530,269 bytes)
   - `sample-song-04.mp3` (361,149 bytes)
   - `sample-video-01.mp4` (1,411,040 bytes)
   - `sample-video-02.mp4` (3,280,927 bytes)
+  - `poster-01.jpg` (21,805 bytes — extracted from actual video 1)
+  - `poster-02.jpg` (5,975 bytes — extracted from actual video 2)
 - **Render smoke test** (`scripts/render-check.mjs`):
   All 14 active scenes render cleanly in isolation:
   - `Countdown`
@@ -54,10 +60,27 @@
   - 12 personalized surprise cards rendered with 12 unique item names, subtitles, IDs, and images.
   - 12 personal Telugu-English messages verified in HTML.
   - EXACTLY 4 polaroid photo memories rendered using user's 4 actual uploaded photographs.
-  - EXACTLY TWO video cards rendered (`sample-video-01.mp4`, `sample-video-02.mp4`).
+  - EXACTLY TWO video cards rendered (`sample-video-01.mp4`, `sample-video-02.mp4`) with poster previews.
   - FOUR songs in config (`sample-song-01.mp3` to `sample-song-04.mp3`).
   - Yellow quote rendered directly below music player ("In a world full of colours, you're my Yellow. 💛").
   - 10 personal memory markers and complete descriptions verified.
+  - Final Memories Map message rendered ("OUR STORY IS JUST BEGINNING ❤️").
+  - Letter continuation paragraph present in config and parchment.
+  - Happy Birthday handwriting sequence tags verified.
+  - 5 candle flames on CandleCake.
+  - Cake cutting, Wish tree, and Love coupons remain completely removed.
+  - Countdown 4 units intact with target `2026-11-24T00:00:00+05:30`.
+  - Continue button and Skip Countdown button present.
+  - Password is `mylove`.
+  - Recipient name is `Sri Lakshmi` across all user-facing content.
+  - No autoplay attribute anywhere.
+  → `ALL CONTENT CHECKS PASSED`.
+- **Responsive Viewport Verification (`scripts/verify-upgrades.mjs`)**:
+  - `320px`: 1-column layout for narrow viewports, no clipped text, readable flip notes.
+  - `360px`, `375px`, `390px`, `430px`: Compact 2-column mobile surprise cards, balanced gaps, proportional image heights, readable descriptions.
+  - `768px`: Tablet responsive view, smooth vertical memory map scrolling, compact cards.
+  - `1024px`, `1366px`, `1920px`: Compact desktop layout (~335px content-driven height, zero awkward vertical empty space, 3-4 column grid, identical visual aesthetics).
+  → `ALL UPGRADE VERIFICATIONS PASSED`.
   - Final Memories Map message rendered ("OUR STORY IS JUST BEGINNING ❤️").
   - 5 candle flames on CandleCake.
   - Cake cutting, Wish tree, and Love coupons remain completely removed.

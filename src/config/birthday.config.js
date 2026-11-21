@@ -30,9 +30,9 @@ import gift10SolarSystem from "../assets/images/surprises/surprise-10-solar-syst
 import gift11LoveNotes from "../assets/images/surprises/surprise-11-love-notes.svg";
 import gift12BirthdayCurrency from "../assets/images/surprises/surprise-12-birthday-currency.svg";
 
-// Video posters
-import videoPoster1 from "../assets/images/video-1-poster.svg";
-import videoPoster2 from "../assets/images/video-2-poster.svg";
+// Video posters generated from actual video files
+import videoPoster1 from "../assets/videos/poster-01.jpg";
+import videoPoster2 from "../assets/videos/poster-02.jpg";
 
 export const birthday = {
   /* ---------------------------------------------------------------- 01 WHO */
@@ -104,6 +104,8 @@ export const birthday = {
       "This year I hope you get everything you quietly wished for and a few things you didn't dare to. I hope your tea is always the right temperature and your playlists never shuffle to a sad song at the wrong moment.",
       "Happy birthday, sunshine. I'm so glad you were born, and I'm even gladder that I get to be around for it.",
     ],
+    continuation:
+      "On your special day, I just want you to remember how precious you are. I hope every little dream in your heart finds its way into reality. May your days be filled with genuine smiles, beautiful surprises, peaceful moments and countless reasons to be happy. No matter how many birthdays pass, I hope you always keep that beautiful smile of yours. Keep shining in your own colours, Sri Lakshmi. Happy Birthday! ❤️",
     signoff: "Yours, entirely and always,",
     signature: "Me 🤍",
     postscript: "P.S. There are 12 personalized surprises further down. Don't skip them, they took ages.",

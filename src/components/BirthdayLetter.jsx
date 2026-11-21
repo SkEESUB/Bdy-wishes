@@ -10,6 +10,23 @@ import { Flower, Heart, Sparkle, Leaf, Bow } from "./decor/Stickers.jsx";
 function Parchment({ onClose }) {
   const reduce = useReducedMotion();
   const L = cfg.letter;
+
+  // Combine original paragraphs with the new continuation paragraph
+  const allParagraphs = L.continuation
+    ? [...L.paragraphs, L.continuation]
+    : L.paragraphs;
+
+  // Compute word offsets for natural sequential handwriting flow
+  let totalWordCount = 0;
+  const renderedParagraphs = allParagraphs.map((para, pIdx) => {
+    const words = para.split(/\s+/).filter(Boolean);
+    const startIndex = totalWordCount;
+    totalWordCount += words.length;
+    return { words, startIndex, isContinuation: pIdx === L.paragraphs.length };
+  });
+
+  const signoffDelay = reduce ? 0 : 0.4 + totalWordCount * 0.032 + 0.15;
+
   return (
     <motion.div
       initial={reduce ? false : { opacity: 0, y: 60, scale: 0.9, rotateX: -18 }}
@@ -33,36 +50,77 @@ function Parchment({ onClose }) {
         type="button"
         onClick={onClose}
         aria-label="Fold the letter back up"
-        className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border-2 border-[#C4A87A]/50 bg-white/70 text-blue-ink transition hover:bg-pink-pastel"
+        className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full border-2 border-[#C4A87A]/50 bg-white/70 text-blue-ink transition hover:bg-pink-pastel cursor-pointer"
       >
         <X size={16} />
       </button>
 
-      <p className="text-center font-cute text-sm uppercase tracking-[0.3em] text-[#A4834F]">
-        a letter from {cfg.recipient.from}
-      </p>
-      <h3 className="mt-2 text-center font-hand text-4xl font-bold text-[#5A4632] sm:text-5xl">{L.title}</h3>
-
-      <motion.div
-        initial="hidden"
-        animate="show"
-        variants={{ show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } } }}
-        className="mt-6 space-y-4"
+      {/* Header animation */}
+      <motion.p
+        initial={reduce ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="text-center font-cute text-sm uppercase tracking-[0.3em] text-[#A4834F]"
       >
-        <motion.p variants={itemVariants} className="font-hand text-3xl text-[#5A4632]">
+        a letter from {cfg.recipient.from}
+      </motion.p>
+      <motion.h3
+        initial={reduce ? false : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        className="mt-2 text-center font-hand text-4xl font-bold text-[#5A4632] sm:text-5xl"
+      >
+        {L.title}
+      </motion.h3>
+
+      <div className="mt-6 space-y-4">
+        {/* Greeting with slight writing delay */}
+        <motion.p
+          initial={reduce ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: reduce ? 0 : 0.3, ease: "easeOut" }}
+          className="font-hand text-3xl text-[#5A4632]"
+        >
           {L.greeting}
         </motion.p>
-        {L.paragraphs.map((para, i) => (
-          <motion.p key={i} variants={itemVariants} className="font-hand text-xl leading-relaxed text-[#5A4632]/90 sm:text-2xl">
-            {para}
-          </motion.p>
+
+        {/* Word-by-word sequential handwriting reveal for all paragraphs */}
+        {renderedParagraphs.map(({ words, startIndex, isContinuation }, pIdx) => (
+          <p
+            key={pIdx}
+            className={`font-hand text-xl leading-relaxed text-[#5A4632]/90 sm:text-2xl ${
+              isContinuation ? "pt-2 text-[#4A3724]" : ""
+            }`}
+          >
+            {words.map((word, wIdx) => {
+              const wordDelay = reduce ? 0 : 0.45 + (startIndex + wIdx) * 0.032;
+              return (
+                <motion.span
+                  key={wIdx}
+                  initial={reduce ? false : { opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.28, delay: wordDelay, ease: "easeOut" }}
+                  className="inline-block mr-[0.28em]"
+                >
+                  {word}
+                </motion.span>
+              );
+            })}
+          </p>
         ))}
-        <motion.div variants={itemVariants} className="pt-2 text-right">
+
+        {/* Signoff, signature and postscript */}
+        <motion.div
+          initial={reduce ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: signoffDelay, ease: "easeOut" }}
+          className="pt-2 text-right"
+        >
           <p className="font-hand text-2xl text-[#5A4632]/80">{L.signoff}</p>
           <p className="font-hand text-3xl font-bold text-[#A4645F]">{L.signature}</p>
           <p className="mt-3 text-left font-cute text-base text-[#8A6E4C]">{L.postscript}</p>
         </motion.div>
-      </motion.div>
+      </div>
 
       <div className="mt-6 flex items-center justify-center gap-3" aria-hidden="true">
         <Heart size={16} color="#E48BB0" />

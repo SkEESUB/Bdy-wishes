@@ -61,6 +61,9 @@ t("Skip Countdown button present on countdown", html.Countdown.includes("Skip Co
 t("password is mylove", cfg.password === "mylove");
 t("password keypad letters", (html.PasswordScreen.match(/letter [a-z]/g) || []).length === 26, `${(html.PasswordScreen.match(/letter [a-z]/g) || []).length}`);
 t("letter sealed initially + greeting for Sri Lakshmi", html.BirthdayLetter.includes("Sri Lakshmi") && cfg.letter.paragraphs.length >= 3, `paras: ${cfg.letter.paragraphs.length}`);
+t("Letter continuation paragraph present in config", Boolean(cfg.letter.continuation && cfg.letter.continuation.includes("precious you are")));
+t("Video cards use real poster previews", Boolean(cfg.videos[0].poster && cfg.videos[1].poster));
+t("Happy Birthday handwriting sections present", html.BirthdayCelebration.includes('data-section="happy"') && html.BirthdayCelebration.includes('data-section="birthday"') && html.BirthdayCelebration.includes('data-section="name"') && html.BirthdayCelebration.includes('data-section="heart"'));
 t("gift reveal present", html.GiftBox.includes(cfg.gift.revealTitle) === false || html.GiftBox.includes("something small"));
 t("no autoplay attribute anywhere", !/\sautoplay[\s>="]/.test(JSON.stringify(html)), JSON.stringify(html).match(/\sautoplay[\s>="]{0,6}/g));
 t("recipient name is Sri Lakshmi", cfg.recipient.name === "Sri Lakshmi" && (html.PasswordScreen.includes("Sri Lakshmi") || html.Countdown.includes("Sri Lakshmi")), cfg.recipient.name);

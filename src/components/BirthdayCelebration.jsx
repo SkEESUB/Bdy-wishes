@@ -31,18 +31,83 @@ export default function BirthdayCelebration({ onComplete }) {
 
   useEffect(() => {
     if (!inView || !headRef.current) return undefined;
-    const letters = headRef.current.querySelectorAll("[data-letter]");
+
+    const happyLetters = headRef.current.querySelectorAll("[data-section='happy']");
+    const birthdayLetters = headRef.current.querySelectorAll("[data-section='birthday']");
+    const nameLetters = headRef.current.querySelectorAll("[data-section='name']");
+    const heartEl = headRef.current.querySelector("[data-section='heart']");
+
     if (reduce) {
-      gsap.set(letters, { opacity: 1, y: 0, rotate: 0, scale: 1 });
+      gsap.set([happyLetters, birthdayLetters, nameLetters], {
+        opacity: 1,
+        clipPath: "inset(0% 0% 0% 0%)",
+        y: 0,
+        scale: 1,
+      });
+      if (heartEl) gsap.set(heartEl, { opacity: 1, scale: 1 });
       return undefined;
     }
-    const tl = gsap.timeline({ defaults: { ease: "back.out(2)" } });
-    tl.fromTo(
-      letters,
-      { opacity: 0, y: 70, rotate: () => gsap.utils.random(-40, 40), scale: 0.4 },
-      { opacity: 1, y: 0, rotate: () => gsap.utils.random(-6, 6), scale: 1, duration: 0.7, stagger: 0.045 }
-    )
-      .to(letters, { scale: 1.06, duration: 0.18, stagger: { each: 0.02, from: "start" }, yoyo: true, repeat: 1 }, "-=0.2");
+
+    // Set initial handwriting state: hidden by left-to-right clip-path
+    gsap.set([happyLetters, birthdayLetters, nameLetters], {
+      opacity: 0,
+      clipPath: "inset(0% 100% 0% 0%)",
+      y: 8,
+    });
+    if (heartEl) {
+      gsap.set(heartEl, { opacity: 0, scale: 0, rotate: -20 });
+    }
+
+    const tl = gsap.timeline();
+
+    // 1. HAPPY appears first with handwriting reveal
+    tl.to(happyLetters, {
+      opacity: 1,
+      clipPath: "inset(0% 0% 0% 0%)",
+      y: 0,
+      duration: 0.18,
+      stagger: 0.08,
+      ease: "power2.out",
+    })
+      // 2. BIRTHDAY follows
+      .to(
+        birthdayLetters,
+        {
+          opacity: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          y: 0,
+          duration: 0.18,
+          stagger: 0.07,
+          ease: "power2.out",
+        },
+        "+=0.08"
+      )
+      // 3. Sri Lakshmi appears underneath
+      .to(
+        nameLetters,
+        {
+          opacity: 1,
+          clipPath: "inset(0% 0% 0% 0%)",
+          y: 0,
+          duration: 0.16,
+          stagger: 0.06,
+          ease: "power2.out",
+        },
+        "+=0.12"
+      )
+      // 4. Heart appears last with a gentle pop animation
+      .to(
+        heartEl,
+        {
+          opacity: 1,
+          scale: 1,
+          rotate: 0,
+          duration: 0.55,
+          ease: "back.out(2.2)",
+        },
+        "+=0.1"
+      );
+
     return () => tl.kill();
   }, [inView, reduce]);
 
@@ -103,20 +168,24 @@ export default function BirthdayCelebration({ onComplete }) {
           >
             {/* Line 1: HAPPY BIRTHDAY */}
             <h3 className="flex flex-wrap items-baseline justify-center gap-x-3 text-[12vw] sm:text-[8vw] md:text-[76px] leading-[0.95]">
-              {words.map((word, wi) => (
-                <span key={wi} className="inline-flex">
-                  {word.split("").map((ch, ci) => (
-                    <span
-                      key={`hb-${wi}-${ci}`}
-                      data-letter
-                      className="inline-block"
-                      style={{ color: LETTER_COLORS[(wi * 3 + ci) % LETTER_COLORS.length] }}
-                    >
-                      {ch}
-                    </span>
-                  ))}
-                </span>
-              ))}
+              {words.map((word, wi) => {
+                const sectionName = wi === 0 ? "happy" : "birthday";
+                return (
+                  <span key={wi} className="inline-flex">
+                    {word.split("").map((ch, ci) => (
+                      <span
+                        key={`hb-${wi}-${ci}`}
+                        data-letter
+                        data-section={sectionName}
+                        className="inline-block"
+                        style={{ color: LETTER_COLORS[(wi * 3 + ci) % LETTER_COLORS.length] }}
+                      >
+                        {ch}
+                      </span>
+                    ))}
+                  </span>
+                );
+              })}
             </h3>
 
             {/* Line 2: Sri Lakshmi ❤️ directly underneath */}
@@ -127,6 +196,7 @@ export default function BirthdayCelebration({ onComplete }) {
                     <span
                       key={`sl-${wi}-${ci}`}
                       data-letter
+                      data-section="name"
                       className="inline-block"
                       style={{ color: LETTER_COLORS[(wi * 2 + ci + 1) % LETTER_COLORS.length] }}
                     >
@@ -137,6 +207,7 @@ export default function BirthdayCelebration({ onComplete }) {
               ))}
               <span
                 data-letter
+                data-section="heart"
                 className="inline-block text-[8vw] sm:text-[5.5vw] md:text-[50px] ml-1 select-none"
                 style={{ color: "#E48BB0" }}
                 aria-hidden="true"

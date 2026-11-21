@@ -45,10 +45,13 @@ t("Final Memories Map title in bundle", distHtml.includes("OUR STORY IS JUST BEG
 t("10 memory stage names in bundle", cfg.memoryMap.every((m) => distHtml.includes(m.name)));
 t("Two videos in bundle", distHtml.includes("sample-video-01.mp4") && distHtml.includes("sample-video-02.mp4"));
 t("Four songs in bundle", songs.every((s) => distHtml.includes(s)));
+t("Letter continuation paragraph in bundle", distHtml.includes("precious you are") && distHtml.includes("genuine smiles"));
+t("Video poster thumbnails in bundle or dist assets", (distHtml.includes("data:image/jpeg") || distHtml.includes("poster-01")) && fs.existsSync("dist/assets/videos/poster-01.jpg"));
+t("Happy Birthday handwriting sections in bundle", distHtml.includes("data-section") && distHtml.includes("happy") && distHtml.includes("birthday"));
 
-// 5. Mobile card height classes in bundle
-t("Compact mobile min-height classes present", distHtml.includes("min-h-[300px]") || distHtml.includes("min-h-[320px]"));
-t("Desktop min-height preserved", distHtml.includes("sm:min-h-[510px]"));
+// 5. Mobile & Desktop compact card height in bundle
+t("Compact card heights applied to both mobile and desktop (excessive 510px removed)", !distHtml.includes("sm:min-h-[510px]"));
+t("Compact card min-height present", distHtml.includes("min-h-[300px]") || distHtml.includes("min-h-[320px]") || distHtml.includes("md:min-h-[335px]"));
 
 // 6. Viewport breakpoints check
 const breakpoints = [320, 360, 375, 390, 430, 768, 1024, 1366, 1920];
