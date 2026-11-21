@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "node ./node_modules/vite/bin/vite.js build",
-    "preview": "vite preview"
+    "preview": "node ./node_modules/vite/bin/vite.js preview"
   },
   "allowScripts": {
+    "esbuild": true,
     "esbuild@0.28.2": true
   },
   "dependencies": {
