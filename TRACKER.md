@@ -27,6 +27,7 @@
 | 23 | Birthday Letter Handwriting & Continuation | ✅ | Sequential word-by-word handwriting animation (`0.032s` stagger, opacity + smooth 5px rise) revealing message as if penned in real-time, added continuation paragraph for Sri Lakshmi, and configurable in config |
 | 24 | Happy Birthday Writing Reveal Sequence | ✅ | GSAP writing reveal sequence: 1. HAPPY appears first, 2. BIRTHDAY follows, 3. Sri Lakshmi appears underneath, 4. Heart pops last with spring back-bounce. Full multicolour palette preserved |
 | 25 | Real Video Preview Images & Card Polish | ✅ | Extracted high-quality frame posters from actual MP4s (`poster-01.jpg`, `poster-02.jpg`), added hover zoom, centered play badge, and auto-play trigger upon modal opening with clean release on close |
+| 26 | Video Captions & Six-Song Music Player Update | ✅ | Updated Video 1 caption to exactly `11:11 Wish ❤️🥺` with pastel pink handwritten typography and subtle fade-in; updated Video 2 to heading `I Love EVERYTHING About YOU! 🫶✨` and supporting message `Because Every Little Thing Becomes Special When It's With You! ❤️♾️` with sequential fade-in; integrated newly identified songs (`sample-song-05.mp3`, `sample-song-06.mp3`) into VinylPlayer for 6 total songs with on-demand loading, track switcher, duration & progress display, and error handling |
 
 ## Verification Log (Automated + Manual)
 - `npm run build` → Succeeded with zero warnings (`dist/index.html` singlefile bundle, 1.67MB).
@@ -35,9 +36,12 @@
   - `sample-song-02.mp3` (4,336,657 bytes)
   - `sample-song-03.mp3` (10,530,269 bytes)
   - `sample-song-04.mp3` (361,149 bytes)
+  - `sample-song-05.mp3` (707,949 bytes — newly integrated)
+  - `sample-song-06.mp3` (1,525,971 bytes — newly integrated)
   - `sample-video-01.mp4` (1,411,040 bytes)
   - `sample-video-02.mp4` (3,280,927 bytes)
   - `poster-01.jpg` (21,805 bytes — extracted from actual video 1)
+  - `poster-02.jpg` (5,975 bytes — extracted from actual video 2)
   - `poster-02.jpg` (5,975 bytes — extracted from actual video 2)
 - **Render smoke test** (`scripts/render-check.mjs`):
   All 14 active scenes render cleanly in isolation:
@@ -61,8 +65,10 @@
   - 12 personal Telugu-English messages verified in HTML.
   - EXACTLY 4 polaroid photo memories rendered using user's 4 actual uploaded photographs.
   - EXACTLY TWO video cards rendered (`sample-video-01.mp4`, `sample-video-02.mp4`) with poster previews.
-  - FOUR songs in config (`sample-song-01.mp3` to `sample-song-04.mp3`).
-  - Yellow quote rendered directly below music player ("In a world full of colours, you're my Yellow. 💛").
+  - Video 1 caption verified: `11:11 Wish ❤️🥺` (pastel pink, handwritten, subtle fade-in).
+  - Video 2 captions verified: `I Love EVERYTHING About YOU! 🫶✨` (heading) & `Because Every Little Thing Becomes Special When It's With You! ❤️♾️` (sub-message) with sequential fade-in.
+  - SIX songs in config (`sample-song-01.mp3` to `sample-song-06.mp3`) with on-demand loading and track switching.
+  - Yellow quote rendered directly below music player ("Different Languages, Different Melodies, Different Vibes — Yet Every Song Tells One Beautiful Story. 🌙❤️✨").
   - 10 personal memory markers and complete descriptions verified.
   - Final Memories Map message rendered ("OUR STORY IS JUST BEGINNING ❤️").
   - Letter continuation paragraph present in config and parchment.

@@ -46,7 +46,10 @@ t("12 personal Telugu-English messages in HTML", html.SurpriseGrid.includes("Flo
 t("EXACTLY 4 polaroid photo memories", (html.PhotoCollage.match(/polaroid/g) || []).length === 4 && cfg.gallery.length === 4, `${cfg.gallery.length} polaroids`);
 t("10 memory markers", (html.MemoryMap.match(/open memory:/g) || []).length === 10 && cfg.memoryMap.length === 10, `${(html.MemoryMap.match(/open memory:/g) || []).length}`);
 t("EXACTLY TWO video cards", (html.VideoGallery.match(/play video:/g) || []).length === 2 && cfg.videos.length === 2, `${(html.VideoGallery.match(/play video:/g) || []).length} video cards`);
-t("FOUR songs in config", cfg.music.songs.length === 4, `${cfg.music.songs.length} songs`);
+t("First video caption is 11:11 Wish", html.VideoGallery.includes("11:11 Wish ❤️🥺"));
+t("Second video displays both requested lines", html.VideoGallery.includes("I Love EVERYTHING About YOU! 🫶✨") && (html.VideoGallery.includes("Because Every Little Thing Becomes Special When It's With You! ❤️♾️") || html.VideoGallery.includes("Because Every Little Thing Becomes Special When It&#x27;s With You! ❤️♾️")));
+t("SIX songs in config", cfg.music.songs.length === 6, `${cfg.music.songs.length} songs`);
+t("All six tracks in VinylPlayer HTML", (html.VinylPlayer.match(/Track [1-6]/g) || []).length >= 6);
 t("Yellow quote directly below music player", html.VinylPlayer.includes("Yellow") && html.VinylPlayer.includes("colours") && html.VinylPlayer.includes("world"));
 t("Final Memories Map message present", html.MemoryMap.includes("OUR STORY IS JUST BEGINNING ❤️") && html.MemoryMap.includes("One first message, one first call"));
 t("10 memory descriptions complete in config", cfg.memoryMap.every((m) => m.description && m.description.length > 20));

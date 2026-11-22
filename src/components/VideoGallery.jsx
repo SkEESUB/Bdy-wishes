@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Play, Pause, Film, AlertTriangle, X } from "lucide-react";
+import { Play, Pause, AlertTriangle, X } from "lucide-react";
 import Section from "./decor/Section.jsx";
 import Modal from "./decor/Modal.jsx";
 import { birthday as cfg } from "../config/birthday.config.js";
@@ -105,13 +105,41 @@ export default function VideoGallery({ onComplete }) {
                   film {i + 1}
                 </span>
               </div>
-              <div className="mt-3 flex items-start justify-between gap-2 px-1">
-                <div className="min-w-0">
-                  <h4 className="truncate font-hand text-xl font-bold text-blue-ink">{v.title}</h4>
-                  <p className="truncate font-body text-sm text-blue-ink/70">{v.caption}</p>
+              {/* Captions below videos */}
+              {i === 0 ? (
+                <div className="mt-3.5 px-2 pb-1 text-center">
+                  <motion.h4
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="font-hand text-2xl font-bold tracking-wide text-pink-deep"
+                  >
+                    11:11 Wish ❤️🥺
+                  </motion.h4>
                 </div>
-                <Film size={18} className="mt-1 shrink-0 text-blue-deep/70" />
-              </div>
+              ) : (
+                <div className="mt-3 px-2 pb-1 text-center">
+                  <motion.h4
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="font-hand text-xl sm:text-2xl font-bold tracking-wide text-blue-deep"
+                  >
+                    I Love EVERYTHING About YOU! 🫶✨
+                  </motion.h4>
+                  <motion.p
+                    initial={reduce ? false : { opacity: 0, y: 8 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.18, ease: "easeOut" }}
+                    className="mt-1.5 font-hand text-sm sm:text-base text-pink-deep/90 leading-snug"
+                  >
+                    Because Every Little Thing Becomes Special When It's With You! ❤️♾️
+                  </motion.p>
+                </div>
+              )}
               <Bow className="absolute -bottom-3 right-4 rotate-6" size={26} color="#F9C8D9" />
             </div>
           </motion.button>
@@ -150,8 +178,18 @@ export default function VideoGallery({ onComplete }) {
 
             <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <h3 className="font-hand text-2xl font-bold text-blue-ink">{active.title}</h3>
-                <p className="font-body text-blue-ink/80">{active.caption}</p>
+                {active.index === 0 ? (
+                  <h3 className="font-hand text-2xl font-bold text-pink-deep">11:11 Wish ❤️🥺</h3>
+                ) : (
+                  <div>
+                    <h3 className="font-hand text-xl sm:text-2xl font-bold text-blue-deep">
+                      I Love EVERYTHING About YOU! 🫶✨
+                    </h3>
+                    <p className="mt-1 font-hand text-sm sm:text-base text-pink-deep/90">
+                      Because Every Little Thing Becomes Special When It's With You! ❤️♾️
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Direct Play/Pause & Close buttons */}

@@ -15,8 +15,8 @@ const fmt = (s) => {
 };
 
 /**
- * SECTION 07 — Vinyl record player with four personal songs.
- * Supports switching between four songs, local MP3 playback, and Web Audio
+ * SECTION 07 — Vinyl record player with six personal songs.
+ * Supports switching between six songs, local MP3 playback, and Web Audio
  * music box synthesis fallback. Never autoplays.
  */
 export default function VinylPlayer({ onComplete }) {
@@ -26,14 +26,14 @@ export default function VinylPlayer({ onComplete }) {
       title: "Happy Birthday Music Box",
       artist: "Handmade Music Box Melody",
       src: "/assets/music/sample-song-01.mp3",
-      durationLabel: "looping melody",
+      durationLabel: "2:57",
     },
     {
       id: "song-2",
       title: "Soft Acoustic Serenade",
       artist: "Birthday Acoustic Box",
       src: "/assets/music/sample-song-02.mp3",
-      durationLabel: "gentle loop",
+      durationLabel: "4:28",
     },
     {
       id: "song-3",
@@ -47,7 +47,21 @@ export default function VinylPlayer({ onComplete }) {
       title: "Our Special Tune",
       artist: "Heartfelt Keepsake",
       src: "/assets/music/sample-song-04.mp3",
-      durationLabel: "keepsake",
+      durationLabel: "0:30",
+    },
+    {
+      id: "song-5",
+      title: "Melodies of Warmth",
+      artist: "Birthday Keepsake Box",
+      src: "/assets/music/sample-song-05.mp3",
+      durationLabel: "0:30",
+    },
+    {
+      id: "song-6",
+      title: "Madhuvaramae",
+      artist: "Sarath Santhosh & Srinisha",
+      src: "/assets/music/sample-song-06.mp3",
+      durationLabel: "0:38",
     },
   ];
 
@@ -328,8 +342,8 @@ export default function VinylPlayer({ onComplete }) {
                   </div>
                 </div>
                 <div className="mt-1 flex justify-between font-ui text-[11px] text-blue-ink/60">
-                  <span>{fmt(pos)}</span>
-                  <span>{currentSong.durationLabel || "looping"} · {fmt(effectiveDuration)}</span>
+                  <span title="Current playback time">{fmt(pos)}</span>
+                  <span title="Total duration">{effectiveDuration > 0 ? fmt(effectiveDuration) : (currentSong.durationLabel || "0:00")}</span>
                 </div>
 
                 <div className="mt-4 flex items-center gap-3">
@@ -431,15 +445,18 @@ export default function VinylPlayer({ onComplete }) {
               setPlaying(false);
               setPos(0);
             }}
-            onError={() => {
+            onError={(e) => {
+              console.warn("Audio playback error for", currentSong.src, e);
+              setError("Audio file could not be played. Switching to music box melody.");
               setMode("melody");
+              setPlaying(false);
             }}
           />
         )}
 
         <div className="flex flex-wrap items-center justify-center gap-2 font-cute text-sm text-blue-deep/80">
           <Sparkle size={14} className="text-pink-deep" />
-          <span>four special songs · select anytime above</span>
+          <span>six special songs · select anytime above</span>
           <Heart size={14} color="#E48BB0" />
         </div>
       </div>

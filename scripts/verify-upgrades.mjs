@@ -12,6 +12,8 @@ const songs = [
   "sample-song-02.mp3",
   "sample-song-03.mp3",
   "sample-song-04.mp3",
+  "sample-song-05.mp3",
+  "sample-song-06.mp3",
 ];
 for (const s of songs) {
   const p = path.join(musicDir, s);
@@ -28,7 +30,7 @@ for (const v of videos) {
 
 // 3. Config check
 const { config: cfg } = await import("../dist-ssr/ssr-entry.js");
-t("Config has 4 songs", cfg.music.songs.length === 4, `${cfg.music.songs.length} songs`);
+t("Config has 6 songs", cfg.music.songs.length === 6, `${cfg.music.songs.length} songs`);
 t("Config has yellow quote", Boolean(cfg.music.yellowQuote && cfg.music.yellowQuote.includes("Yellow")), cfg.music.yellowQuote);
 t("Config has exactly 2 videos", cfg.videos.length === 2, `${cfg.videos.length} videos`);
 t("Config has 10 memories", cfg.memoryMap.length === 10, `${cfg.memoryMap.length} memories`);
@@ -44,7 +46,10 @@ t("Yellow quote in bundle", distHtml.includes("Yellow"));
 t("Final Memories Map title in bundle", distHtml.includes("OUR STORY IS JUST BEGINNING"));
 t("10 memory stage names in bundle", cfg.memoryMap.every((m) => distHtml.includes(m.name)));
 t("Two videos in bundle", distHtml.includes("sample-video-01.mp4") && distHtml.includes("sample-video-02.mp4"));
-t("Four songs in bundle", songs.every((s) => distHtml.includes(s)));
+t("Six songs in bundle", songs.every((s) => distHtml.includes(s)));
+t("First video caption in bundle", distHtml.includes("11:11 Wish"));
+t("Second video heading in bundle", distHtml.includes("I Love EVERYTHING About YOU!"));
+t("Second video sub-message in bundle", distHtml.includes("Because Every Little Thing Becomes Special When It's With You!"));
 t("Letter continuation paragraph in bundle", distHtml.includes("precious you are") && distHtml.includes("genuine smiles"));
 t("Video poster thumbnails in bundle or dist assets", (distHtml.includes("data:image/jpeg") || distHtml.includes("poster-01")) && fs.existsSync("dist/assets/videos/poster-01.jpg"));
 t("Happy Birthday handwriting sections in bundle", distHtml.includes("data-section") && distHtml.includes("happy") && distHtml.includes("birthday"));

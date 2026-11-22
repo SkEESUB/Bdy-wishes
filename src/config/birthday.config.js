@@ -320,7 +320,7 @@ export const birthday = {
     afterLabel: "reopen the box",
   },
 
-  /* --------------------------------------------------------- 11 MUSIC (FOUR SONGS) */
+  /* --------------------------------------------------------- 11 MUSIC (SIX SONGS) */
   music: {
     yellowQuote: "In a world full of colours, you're my Yellow. 💛",
     songs: [
@@ -329,7 +329,7 @@ export const birthday = {
         title: "Happy Birthday Music Box",
         artist: "Handmade Music Box Melody",
         src: "/assets/music/sample-song-01.mp3",
-        durationLabel: "looping melody",
+        durationLabel: "2:57",
         description: "A soft, chiming music box melody woven with birthday warmth.",
       },
       {
@@ -337,7 +337,7 @@ export const birthday = {
         title: "Soft Acoustic Serenade",
         artist: "Birthday Acoustic Box",
         src: "/assets/music/sample-song-02.mp3",
-        durationLabel: "gentle loop",
+        durationLabel: "4:28",
         description: "Gentle acoustic strings that make every moment feel warm and calm.",
       },
       {
@@ -353,8 +353,24 @@ export const birthday = {
         title: "Our Special Tune",
         artist: "Heartfelt Keepsake",
         src: "/assets/music/sample-song-04.mp3",
-        durationLabel: "keepsake",
+        durationLabel: "0:30",
         description: "A sweet, heartfelt acoustic note to celebrate your special day.",
+      },
+      {
+        id: "song-5",
+        title: "Melodies of Warmth",
+        artist: "Birthday Keepsake Box",
+        src: "/assets/music/sample-song-05.mp3",
+        durationLabel: "0:30",
+        description: "A gentle, heartwarming melody crafted to celebrate your joy.",
+      },
+      {
+        id: "song-6",
+        title: "Madhuvaramae",
+        artist: "Sarath Santhosh & Srinisha",
+        src: "/assets/music/sample-song-06.mp3",
+        durationLabel: "0:38",
+        description: "A timeless, sweet acoustic melody celebrating our bond.",
       },
     ],
     note: "Replace with your own MP3 files in public/assets/music/",
@@ -364,8 +380,8 @@ export const birthday = {
   videos: [
     {
       id: "v1",
-      title: "The Surprise Reveal",
-      caption: "The moment everything started — your face was priceless.",
+      title: "11:11 Wish ❤️🥺",
+      caption: "",
       src: "/assets/videos/sample-video-01.mp4",
       remoteSrc:
         "https://videos.pexels.com/video-files/7600583/7600583-hd_1920_1080_25fps.mp4",
@@ -373,8 +389,9 @@ export const birthday = {
     },
     {
       id: "v2",
-      title: "Laughter & Midnight Cake",
-      caption: "Holding far too many balloons and laughing uncontrollably.",
+      title: "I Love EVERYTHING About YOU! 🫶✨",
+      subtitle: "Because Every Little Thing Becomes Special When It's With You! ❤️♾️",
+      caption: "Because Every Little Thing Becomes Special When It's With You! ❤️♾️",
       src: "/assets/videos/sample-video-02.mp4",
       remoteSrc:
         "https://videos.pexels.com/video-files/7119631/7119631-hd_1920_1080_25fps.mp4",
